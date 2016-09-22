@@ -1,0 +1,188 @@
+.contact_us {
+    overflow: hidden;
+    padding-top: 50px;
+    padding-bottom: 90px;
+}
+
+.contact_us form {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.contact_us .input_group {
+    float: left;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.contact_us .input_group:last-child {
+    margin-bottom: 0;
+}
+
+.contact_us .input_group.full_width {
+    width: 100%;
+}
+
+.contact_us input[type="text"],
+.contact_us input[type="email"],
+.contact_us textarea {
+    width: 100%;
+    resize: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #484848;
+    padding: 19px 25px;
+    border: 3px solid #141558;
+    line-height: 23px;
+}
+
+.contact_us input::-webkit-input-placeholder  {color: #484848; opacity: 1; font-weight: 300;}
+.contact_us input::-moz-placeholder {color: #484848; opacity: 1; font-weight: 300;}
+.contact_us input:-moz-placeholder {color: #484848; opacity: 1; font-weight: 300;}
+.contact_us input:-ms-input-placeholder {color: #484848; opacity: 1; font-weight: 300;}
+.contact_us textarea::-webkit-input-placeholder {color: #484848; opacity: 1; font-weight: 300;}
+.contact_us textarea::-moz-placeholder {color: #484848; opacity: 1; font-weight: 300;}
+.contact_us textarea:-moz-placeholder {color: #484848; opacity: 1; font-weight: 300;}
+.contact_us textarea:-ms-input-placeholder {color: #484848; opacity: 1; font-weight: 300;}
+
+.contact_us textarea {
+    height: 120px;
+}
+
+.contact_us .customselect {
+    width: 100%;
+    position: relative;
+    display: block;
+}
+
+.contact_us .customselect .title {
+    width: 100%;
+    border: 3px solid #141558;
+    color: #484848;
+    font-weight: 300;
+    position: relative;
+    padding: 19px 25px;
+    font-size: 18px;
+    display: block;
+    background: none;
+    line-height: 23px;
+}
+.contact_us .customselect.option_selected .title {
+    font-weight: 600;
+}
+
+.contact_us .customselect .title:after {
+    content: "";
+    /*color: #ffda00;*/
+    position: absolute;
+    display: block;
+    top: 22px;
+    right: 24px;
+    width: 12px;
+    height: 12px;
+    border-bottom: 3px solid #141558;
+    border-right: 3px solid #141558;
+    transform: rotate(45deg);
+}
+
+.contact_us .customselect ul {
+    width: 100%;
+    text-align: left;
+    border-color: #141558;
+    border-width: 3px;
+    background: #141558;
+    padding: 6px 0;
+}
+
+.contact_us .customselect li {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    padding: 10px 25px;
+}
+
+.contact_us .customselect li:hover {
+    /*background-color: #2687E0;*/
+    text-decoration: underline;
+}
+
+.contact_us .submit {
+    text-transform: uppercase;
+    border: 3px solid #141558;
+    background: transparent;
+    color: #141558;
+    font-size: 2.4em;
+    font-weight: 400;
+    text-align: center;
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    height: 74px;
+    margin: 0 auto;
+    position: relative;
+    transition-property: background, color;
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+}
+
+.contact_us .submit:hover {
+    background: #141558;
+    color: #fff;
+}
+
+.contact_us .soc_menu {
+    margin-top: 25px;
+}
+
+.contact_us .soc_menu li {
+    display: inline-block;
+}
+
+.contact_us .soc_menu li+li {
+    margin-left: 30px;
+}
+
+.contact_us .soc_menu li a {
+    width: 70px;
+    text-align: center;
+    font-size: 41px;
+    display: block;
+    color: #b4b4b4;
+    overflow: hidden;
+    padding: 17px 0;
+    transition-property: color, background;
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+}
+
+.contact_us .soc_menu li a:hover {
+    color: #fff;
+}
+.contact_us .soc_menu li.facebook a:hover {
+    background: #5a5b8a;
+}
+.contact_us .soc_menu li.twitter a:hover {
+    background: rgb(41, 170, 227);
+}
+.contact_us .soc_menu li.google a:hover {
+    background: rgb(220, 76, 65);
+}
+
+@media screen and (min-width: 450px) {
+
+    .contact_us .block_main_title {
+        display: inline-block;
+        padding: 58px 96px 34px 96px;
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+
+    .contact_us .input_group {
+        width: 50%;
+    }
+
+}

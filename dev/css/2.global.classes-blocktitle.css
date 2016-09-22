@@ -1,0 +1,19 @@
+.block_main_title {
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 3em;
+    font-weight: 300;
+    position: relative;
+    color: #141558;
+    word-wrap: break-word;
+    background: url("../img/block_main_title_icon.png") center left no-repeat;
+    padding: 58px 0 34px 96px;
+}
+
+@media screen and (min-width: 768px) {
+
+    .block_main_title {
+        font-size: 4.8em;
+    }
+
+}

@@ -1,0 +1,234 @@
+@keyframes display_block_through_opacity {
+    0% {
+        opacity: 0;
+    }
+}
+
+@keyframes display_block_through_height {
+    0% {
+        height: 1px;
+    }
+
+    100% {
+        height: 63px;
+    }
+}
+
+header {
+    background: #fff;
+    position: relative;
+    width: 100%;
+    /*z-index: 1000;*/
+    /*top: 100px;*/
+    /*transform: translateY(-100px);*/
+    /*transition: transform ease 0.2s;*/
+    /*will-change: transform;*/
+}
+
+header.fixed {
+    position: fixed;
+    top: 0;
+    transform: translateY(0);
+    transition: transform ease 0.2s;
+    left: 0;
+    border-bottom: 2px solid black;
+}
+
+#main_menu {
+    background: #fff;
+}
+
+#main_menu .navbar_header {
+    margin: 0 -15px;
+    padding: 0 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#main_menu .navbar_header .navbar_brand {
+    height: 100%;
+    display: block;
+    padding: 25px 0 24px;
+    float: right;
+}
+
+#main_menu .navbar_header .navbar_brand span {
+    color: black;
+}
+
+#main_menu .navbar_header .navbar_brand span+span {
+    color: #2791f2;
+}
+
+#main_menu .navbar_header .dropdown_toggle {
+    padding: 28px 15px 27px;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: background ease 0.5s;
+}
+
+#main_menu.open .navbar_header .dropdown_toggle {
+    background: #ddd;
+}
+
+#main_menu .navbar_header .dropdown_toggle .icon_bar {
+    background-color: #000;
+    display: block;
+    width: 32px;
+    height: 3px;
+    border-radius: 1px;
+}
+
+#main_menu .navbar_header .dropdown_toggle .icon_bar+.icon_bar {
+    margin-top: 6px;
+}
+
+#main_menu .dropdown_container {
+    margin: 0 -15px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+#main_menu .menu_bar {
+    padding: 15px 0;
+    position: static;
+}
+
+#main_menu .menu_bar>li>a {
+    font-size: 2rem;
+    color: #141558;
+    text-transform: uppercase;
+    padding: 10px 0 10px 25px;
+    transition-duration: 0.5s;
+}
+
+#main_menu .menu_bar>li>a span {
+    height: auto;
+}
+
+#main_menu .menu_bar>li:hover>a {
+    color: #72b22b;
+    /*background: rgba(39, 145, 242, 0.39);*/
+}
+
+header.home-active .home,
+header.boosting-active .boosting,
+header.services-active .services,
+header.team-active .team,
+header.faq-active .faq,
+header.contact-active .contact {
+    background: linear-gradient(to bottom, #344d25, #9bf62e);
+    color: white!important;
+}
+
+header.fixed #main_menu .navbar_header .dropdown_toggle {
+    padding: 20px 15px 20px;
+}
+
+@media screen and (min-width: 768px) {
+
+    #main_menu .navbar_header {
+        margin: 0 -30px;
+        padding: 0 30px;
+    }
+
+    #main_menu .navbar_header .dropdown_toggle {
+        padding: 28px 15px 27px;
+    }
+
+    header.fixed #main_menu .navbar_header .dropdown_toggle {
+        padding: 20px 30px 20px;
+    }
+
+    #main_menu .dropdown_container {
+        margin: 0 -30px;
+    }
+
+    #main_menu .navbar_header .dropdown_toggle {
+        right: 30px;
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+
+    #main_menu .skew,
+    #main_menu .skew .unskew {
+        transform: none;
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+
+    header {
+        border-bottom: 1px solid #161616;
+    }
+
+    #main_menu {
+        position: static;
+        height: 92px;
+    }
+
+    #main_menu * {
+        height: 100%;
+    }
+
+    #main_menu .navbar_header .navbar_brand {
+        font-size: 4em;
+        padding: 33px 0 0;
+        float: none;
+    }
+
+    #main_menu .navbar_header .navbar_brand img {
+        height: auto;
+    }
+
+    #main_menu .navbar_header {
+        float: left;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    #main_menu .menu_bar {
+        padding: 0;
+        height: 100%;
+        float: left;
+    }
+
+    #main_menu .menu_bar li {
+        display: block;
+        float: left;
+    }
+
+    #main_menu .menu_bar>li>a {
+        text-align: center;
+        padding: 36px 15px 0;
+        margin: 0;
+
+        font-size: 1.6rem;
+    }
+
+    #main_menu .dropdown_container {
+        margin: 0;
+        float: right;
+        border: none;
+    }
+
+    header.fixed #main_menu .navbar_header .navbar_brand {
+        font-size: 3em;
+        padding: 19px 0 20px;
+    }
+
+    header.fixed #main_menu .menu_bar {
+        height: 74px;
+    }
+
+    header.fixed #main_menu .menu_bar > li > a {
+        padding: 28px 0 0;
+    }
+
+}

@@ -1,0 +1,27 @@
+.skew {
+    transform: skewX(-10deg);
+    display: block;
+}
+
+.skew .unskew {
+    transform: skewX(10deg);
+    display: block;
+}
+
+.skew_m7 {
+    transform: skewX(-7deg);
+    display: block;
+}
+
+.skew_m7 .unskew {
+    transform: skewX(7deg);
+    display: block;
+}
+
+.skew_after:after {
+    transform: skewX(-10deg);
+}
+
+.skew_m7_after:after {
+    transform: skewX(-7deg);
+}

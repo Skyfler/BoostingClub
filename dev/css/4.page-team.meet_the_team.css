@@ -1,0 +1,114 @@
+.meet_the_team {
+    overflow: hidden;
+    padding-top: 70px;
+    padding-bottom: 100px;
+}
+
+.meet_the_team .meet_the_team_block_container {
+    padding-top: 30px;
+}
+
+.meet_the_team .meet_the_team_block_container .block {
+    float: left;
+    width: 100%;
+}
+
+.meet_the_team .meet_the_team_block_container .block+.block {
+    margin-top: 30px;
+}
+
+.meet_the_team .meet_the_team_block_container .block_content {
+    margin: 0 auto;
+    background: #141558;
+    padding: 40px 0 45px;
+    cursor: default;
+    transition: background ease 0.5s;
+    max-width: 350px;
+}
+
+.meet_the_team .meet_the_team_block_container .block_content:hover {
+    background: #676eb0;
+}
+
+.meet_the_team .meet_the_team_block_container .block_content div {
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.meet_the_team .meet_the_team_block_container img {
+    display: inline-block;
+}
+
+.meet_the_team .meet_the_team_block_container .name {
+    font-size: 2.4em;
+    color: #fff;
+    margin-bottom: 28px;
+}
+
+.meet_the_team .meet_the_team_block_container .avatar_container {
+    margin-bottom: 10px;
+}
+
+.meet_the_team .meet_the_team_block_container .avatar_container img {
+    border-radius: 50%;
+}
+
+.meet_the_team .meet_the_team_block_container .div_img_container {
+    /*margin-bottom: 10px;*/
+}
+
+.meet_the_team .meet_the_team_block_container .division {
+    font-size: 1.8em;
+    font-weight: 300;
+    color: #fff;
+}
+
+@media screen and (max-width: 800px) {
+
+    .meet_the_team .skew_m7,
+    .meet_the_team .skew_m7 .unskew {
+        transform: none;
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+
+    .meet_the_team .meet_the_team_block_container .block,
+    .meet_the_team .meet_the_team_block_container .block+.block {
+        width: 50%;
+        margin-top: 0;
+    }
+    .meet_the_team .meet_the_team_block_container .block+.block+.block {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .meet_the_team .meet_the_team_block_container .block .block_content {
+        width: 90%;
+        max-width: 380px;
+    }
+    .meet_the_team .meet_the_team_block_container .block+.block+.block .block_content {
+        width: 45%;
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+
+    .meet_the_team .meet_the_team_block_container .block,
+    .meet_the_team .meet_the_team_block_container .block+.block,
+    .meet_the_team .meet_the_team_block_container .block+.block+.block {
+        width: 33.333333%;
+        margin-top: 0;
+    }
+
+    .meet_the_team .meet_the_team_block_container .block+.block+.block .block_content {
+        width: 90%;
+    }
+
+}

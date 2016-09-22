@@ -1,0 +1,116 @@
+.our_features {
+    display: none;
+}
+
+@media screen and (min-width: 800px) {
+
+    .our_features {
+        overflow: hidden;
+        display: block;
+        padding-top: 70px;
+    }
+
+    .our_features .features_bg_container {
+        background: url("../img/features_bg.jpg") top center no-repeat;
+        background-size: auto 100%;
+    }
+
+    .our_features .features_block_container {
+        position: relative;
+    }
+
+    .our_features .features_block_container .row {
+        float: left;
+        width: 100%;
+    }
+
+    .our_features .features_block_container .block {
+        float: left;
+        width: 50%;
+        padding: 50px 0 60px;
+    }
+
+    .our_features .features_block_container .block:after {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-left: 2px solid #a1a1bc;
+        border-right: 2px solid #a1a1bc;
+    }
+    .our_features .features_block_container .block+.block:after {
+        border-left: none;
+        left: 50%;
+    }
+
+    .our_features .features_block_container .icon {
+        width: 93px;
+        height: 88px;
+        margin: 0 auto;
+        /*background-color: rgba(255, 0, 0, 0.5);*/
+        position: relative;
+        left: 13px;
+        background-repeat: no-repeat;
+    }
+    .our_features .features_block_container .vpn .icon {
+        background-image: url("../img/icon_lock.png");
+    }
+    .our_features .features_block_container .time .icon {
+        background-image: url("../img/icon_clock.png");
+    }
+    .our_features .features_block_container .offline .icon {
+        background-image: url("../img/icon_text_bubble.png");
+    }
+    .our_features .features_block_container .spectate .icon {
+        background-image: url("../img/icon_camera.png");
+    }
+
+    .our_features .features_block_container .title {
+        font-size: 3em;
+        font-weight: 600;
+        color: #fff;
+        text-transform: uppercase;
+        /*max-width: 80%;*/
+        margin: 24px auto 0;
+        position: relative;
+        left: 8px;
+    }
+
+    .our_features .features_block_container .text {
+        font-size: 1.8em;
+        line-height: 24px;
+        color: #fff;
+        font-weight: 300;
+        max-width: 80%;
+        margin: 13px auto 0;
+        position: relative;
+        left: -4px;
+    }
+
+}
+
+@media screen and (min-width: 1250px) {
+
+    .our_features .features_block_container .row {
+        position: static;
+        width: 50%;
+    }
+
+    .our_features .features_block_container .block:after {
+        width: 25%;
+    }
+    .our_features .features_block_container .block+.block:after {
+        border-left: none;
+        left: 25%;
+    }
+    .our_features .features_block_container .row+.row .block:after {
+        border-left: none;
+        left: 50%;
+    }
+    .our_features .features_block_container .row+.row .block+.block:after {
+        left: 75%;
+    }
+
+}
