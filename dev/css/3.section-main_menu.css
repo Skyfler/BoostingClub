@@ -51,12 +51,12 @@ header.fixed {
     float: right;
 }
 
-#main_menu .navbar_header .navbar_brand span {
-    color: black;
+#main_menu .navbar_header .navbar_brand .logo_l {
+    display: none;
 }
 
-#main_menu .navbar_header .navbar_brand span+span {
-    color: #2791f2;
+#main_menu .navbar_header .navbar_brand .logo_s {
+    display: block;
 }
 
 #main_menu .navbar_header .dropdown_toggle {
@@ -135,7 +135,7 @@ header.fixed #main_menu .navbar_header .dropdown_toggle {
     }
 
     #main_menu .navbar_header .dropdown_toggle {
-        padding: 28px 15px 27px;
+        padding: 28px 30px 27px;
     }
 
     header.fixed #main_menu .navbar_header .dropdown_toggle {
@@ -229,6 +229,18 @@ header.fixed #main_menu .navbar_header .dropdown_toggle {
 
     header.fixed #main_menu .menu_bar > li > a {
         padding: 28px 0 0;
+    }
+
+}
+
+@media screen and (min-width: 890px) {
+
+    #main_menu .navbar_header .navbar_brand .logo_l {
+        display: block;
+    }
+
+    #main_menu .navbar_header .navbar_brand .logo_s {
+        display: none;
     }
 
 }

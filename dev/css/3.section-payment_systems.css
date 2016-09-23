@@ -7,7 +7,6 @@
     .payment_systems {
         display: block;
         background: #c1c1c1;
-        border-bottom: 5px solid #141558;
     }
 
     .payment_systems .container {

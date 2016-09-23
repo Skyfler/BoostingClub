@@ -1,0 +1,106 @@
+@@include('./templates/top1.html')
+<title>League Boosting</title>
+@@include('./templates/top2.html')
+<header class="boosting-active">
+    @@include('./templates/headerInnerHTML.html')
+</header>
+<section class="league_boosting">
+    <div class="container">
+        <h2 class="block_main_title remove_padding">BOOST PURCHASE</h2>
+        <div class="tabs_container">
+            <div class="row remove_padding">
+                <ul class="tabs clr skew">
+                    <li class="tab active-tab"><a href="#division"><span class="unskew">Division Boost</span></a></li>
+                    <li class="tab"><a href="#wins"><span class="unskew">Wins Boost</span></a></li>
+                    <li class="tab"><a href="#duo"><span class="unskew">Duo Queue</span></a></li>
+                </ul>
+            </div>
+            <div class="tab_blocks_container">
+                <div class="tab_block active-tab-block fade clr" id="division">
+                    <div class="current_rank clr quarter_width">
+                        <div class="input_group block_title">Current Rank</div>
+                        <div class="input_group img_container"><img src="img/tiers/bronze_5.png" class="responsive_img"></div>
+                        <div class="input_group">
+                            <div id="current-league-select" class="customselect" name="Current League" data-component="form-input">
+                                <button class="title">Bronze</button>
+                                <ul>
+                                    <!-- значение хранится в свойстве data-value -->
+                                    <li data-value="option_1">Dimond</li>
+                                    <li data-value="option_2">Platinum</li>
+                                    <li data-value="option_3">Gold</li>
+                                    <li data-value="option_4">Silver</li>
+                                    <li data-value="option_5">Bronze</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="input_group">
+                            <div id="current-division-select" class="customselect" name="Current Division" data-component="form-input">
+                                <button class="title">Division V</button>
+                                <ul>
+                                    <!-- значение хранится в свойстве data-value -->
+                                    <li data-value="option_1">Division I</li>
+                                    <li data-value="option_2">Division II</li>
+                                    <li data-value="option_3">Division III</li>
+                                    <li data-value="option_4">Division IV</li>
+                                    <li data-value="option_5">Division V</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="input_group">
+                            <div id="current-lp-select" class="customselect" name="Current LP" data-component="form-input">
+                                <button class="title">0-20 LP</button>
+                                <ul>
+                                    <!-- значение хранится в свойстве data-value -->
+                                    <li data-value="option_1">80-100 LP</li>
+                                    <li data-value="option_2">60-80 LP</li>
+                                    <li data-value="option_3">40-60 LP</li>
+                                    <li data-value="option_4">20-40 LP</li>
+                                    <li data-value="option_5">0-20 LP</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="desired_rank clr quarter_width">
+                        <div class="input_group block_title">Desired Rank</div>
+                        <div class="input_group img_container"><img src="img/tiers/bronze_5.png" class="responsive_img"></div>
+                        <div class="input_group">
+                            <div id="desired-league-select" class="customselect" name="Desired League" data-component="form-input">
+                                <button class="title">Bronze</button>
+                                <ul>
+                                    <!-- значение хранится в свойстве data-value -->
+                                    <li data-value="option_1">Master</li>
+                                    <li data-value="option_2">Dimond</li>
+                                    <li data-value="option_3">Platinum</li>
+                                    <li data-value="option_4">Gold</li>
+                                    <li data-value="option_5">Silver</li>
+                                    <li data-value="option_6">Bronze</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="input_group">
+                            <div id="desired-division-select" class="customselect" name="Desired Division" data-component="form-input">
+                                <button class="title">Division V</button>
+                                <ul>
+                                    <!-- значение хранится в свойстве data-value -->
+                                    <li data-value="option_1">Division I</li>
+                                    <li data-value="option_2">Division II</li>
+                                    <li data-value="option_3">Division III</li>
+                                    <li data-value="option_4">Division IV</li>
+                                    <li data-value="option_5">Division V</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @@include('./templates/league_boosting.form_container.html')
+                </div>
+                <div class="tab_block clr" id="wins">
+                    @@include('./templates/league_boosting.form_container.html')
+                </div>
+                <div class="tab_block clr" id="duo">
+                    @@include('./templates/league_boosting.form_container.html')
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@@include('./templates/bottom.html')

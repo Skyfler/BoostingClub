@@ -4,6 +4,7 @@
 
     var Polyfills = require('./polyfills');
     var Menu = require('./dropdown-menu.js');
+    var Tabs = require('./tabs');
     var CustomSelect = require('./customSelect');
 
     Polyfills.runAll();
@@ -30,7 +31,14 @@
                 elem: customSelectElemArr[i]
             });
         }
+    }
 
+    var tabsContainerElem = document.querySelector('.tabs_container');
+    if (tabsContainerElem) {
+        window.tabs = new Tabs({
+            elem: tabsContainerElem,
+            transitionDuration: 0.15
+        });
     }
 
 })();

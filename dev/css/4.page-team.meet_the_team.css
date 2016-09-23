@@ -57,11 +57,11 @@
     border-radius: 50%;
 }
 
-.meet_the_team .meet_the_team_block_container .div_img_container {
+.meet_the_team .meet_the_team_block_container .tier_img_container {
     /*margin-bottom: 10px;*/
 }
 
-.meet_the_team .meet_the_team_block_container .division {
+.meet_the_team .meet_the_team_block_container .tier {
     font-size: 1.8em;
     font-weight: 300;
     color: #fff;
