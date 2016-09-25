@@ -1,11 +1,9 @@
 .customselect {
-    width: 200px;
-    font-size: 14px;
     display: inline-block;
 }
 
 .customselect .title {
-    border: 2px groove #ADD8E6;
+    border: 2px groove #000000;
     box-sizing: border-box;
     padding: 2px;
     cursor: pointer;

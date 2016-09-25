@@ -16,6 +16,16 @@ function Menu(options) {
 Menu.prototype = Object.create(Dropdown.prototype);
 Menu.prototype.constructor = Menu;
 
+Menu.prototype.remove = function() {
+    if (this._subMenuArr && this._subMenuArr.length > 0) {
+        for (var i = 0; i < this._subMenuArr.length; i++) {
+            this._subMenuArr[i].remove();
+        }
+    }
+
+    Dropdown.prototype.remove.apply(this, arguments);
+};
+
 Menu.prototype._openDropdown = function() {
     if (this._subMenuTransition) {
         clearTimeout(this._subMenuTransition);

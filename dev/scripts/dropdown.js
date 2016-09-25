@@ -19,20 +19,21 @@ function Dropdown(options) {
         this._state = 'closed';
     }
 
+    this._sendEventsOnToggle = options.sendEventsOnToggle;
     this._canceled = this._checkForMaxSizeLimit();
 
     this._initHeight();
 
     this._onClick = this._onClick.bind(this);
-    this._onSignalToCloseMenu = this._onSignalToCloseMenu.bind(this);
+    this._onSignalToCloseDropdown = this._onSignalToCloseDropdown.bind(this);
     this._watchForMaxSize = this._watchForMaxSize.bind(this);
 
     this._addListener(this._elem, 'click', this._onClick);
     if (options.closeOnResize) {
-        this._addListener(window, 'resize', this._onSignalToCloseMenu);
+        this._addListener(window, 'resize', this._onSignalToCloseDropdown);
     }
     if (options.listenToCloseSignal) {
-        this._addListener(document, 'signaltoclosemenu', this._onSignalToCloseMenu);
+        this._addListener(document, 'signaltoclosedropdown', this._onSignalToCloseDropdown);
     }
     if (this._cancelDropdownOnGreaterThan) {
         this._addListener(window, 'resize', this._watchForMaxSize);
@@ -87,6 +88,15 @@ Dropdown.prototype._toggleDropdown = function(target, e) {
             this._openDropdown();
         } else {
             this._closeDropdown();
+        }
+
+        if (this._sendEventsOnToggle) {
+            this._sendCustomEvent(this._elem, 'dropdowntoggle', {
+                bubbles: true,
+                detail: {
+                    state: this._state
+                }
+            });
         }
 
         return true;
@@ -205,10 +215,25 @@ Dropdown.prototype._preventDefaultCheck = function(e) {
     }
 };
 
-Dropdown.prototype._onSignalToCloseMenu = function(e) {
+Dropdown.prototype._onSignalToCloseDropdown = function(e) {
     // console.log('Got signal to close menu');
+    var check = false;
 
-    if (this._state === 'open') {
+    if (e.type === 'signaltoclosedropdown') {
+        var targetDropdownSelector = e.detail.targetDropdownSelector;
+        var targetDropdownElem = e.detail.targetDropdownElem;
+
+        if (
+            (targetDropdownSelector && this._elem.matches(targetDropdownSelector)) ||
+            (targetDropdownElem && this._elem === targetDropdownElem)
+        ) {
+            check = true;
+        }
+    } else if (e.type === 'resize') {
+        check = true;
+    }
+
+    if (check && this._state === 'open') {
         this._toggleDropdown();
     }
 };

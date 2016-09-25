@@ -11,15 +11,13 @@ SubMenu.prototype.constructor = Dropdown;
 
 SubMenu.prototype._toggleDropdown = function(target, e) {
     if (Dropdown.prototype._toggleDropdown.apply(this, arguments)) {
-        var widgetEvent = new CustomEvent('submenutoggle', {
+        this._sendCustomEvent(this._elem, 'submenutoggle', {
             bubbles: true,
             detail: {
                 height: parseFloat(this._dropdownContainer.style.height),
                 state: this._state
             }
         });
-
-        this._elem.dispatchEvent(widgetEvent);
     }
 };
 

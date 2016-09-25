@@ -91,7 +91,8 @@
 }
 
 .league_boosting .tabs_container .tab_block .quarter_width .input_group > * {
-    margin: 0 auto;
+    margin-right: auto;
+    margin-left: auto;
     max-width: 253px;
 }
 
@@ -178,6 +179,35 @@
     text-decoration: underline;
 }
 
+.league_boosting .tabs_container .custom_input_range {
+    margin: 10px 0;
+    height: 10px;
+    background: #141558;
+    padding: 0 17px;
+}
+
+.league_boosting .tabs_container .custom_input_range .ruler {
+    height: 100%;
+}
+
+.league_boosting .tabs_container .custom_input_range .thumb {
+    position: relative;
+    top: -7px;
+    width: 0;
+    height: 24px;
+    cursor: pointer;
+}
+
+.league_boosting .tabs_container .custom_input_range .thumb:after {
+    content: '';
+    position: absolute;
+    width: 34px;
+    left: -17px;
+    height: 100%;
+    background: #fff;
+    border: 3px solid #141558;
+}
+
 .league_boosting .tabs_container .submit {
     border: 3px solid #141558;
     background: transparent;
@@ -214,15 +244,32 @@
 }
 
 .league_boosting .tabs_container .tab_block .block_title {
-    margin-bottom: 0;
+    margin-bottom: 20px;
     font-size: 2.4em;
     font-weight: 600;
     text-transform: uppercase;
     color: #141558;
 }
+.league_boosting .tabs_container .tab_block .summoner .block_title {
+    margin-bottom: 30px;
+}
 
 .league_boosting .tabs_container .tab_block .img_container {
-    margin-bottom: 0;
+    margin-bottom: 26px;
+}
+
+.league_boosting .tabs_container .tab_block .number_of_wins .number_container {
+    margin-bottom: 35px;
+    font-size: 15em;
+    font-weight: 300;
+    color: #a3a3a3;
+}
+.league_boosting .tabs_container .tab_block .summoner .number_container {
+    margin-bottom: 13px;
+    font-size: 3em;
+    font-weight: 600;
+    color: #a3a3a3;
+    padding-top: 25px;
 }
 
 .league_boosting .tabs_container .form_container {
