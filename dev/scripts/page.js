@@ -6,8 +6,10 @@
     var Menu = require('./dropdown-menu.js');
     var DropdownGroup = require('./dropdown-dropdownGroup');
     var Tabs = require('./tabs');
-    var CustomSelect = require('./customSelect');
-    var CustomInputRange = require('./customInputRange');
+    var ContactFormController = require('./contactFormController');
+    var DivisionBoostController = require('./boostController-division');
+    var WinsBoostController = require('./boostController-wins');
+    var DuoBoostController = require('./boostController-duo');
 
     Polyfills.runAll();
 
@@ -37,40 +39,43 @@
         });
     }
 
-    var customSelectElemArr = document.querySelectorAll('.customselect');
-    var customSelectArr = [];
-    if (customSelectElemArr.length > 0) {
-
-        for (var i = 0; i < customSelectElemArr.length; i++) {
-            /*console.log('Custom select ' + i +':');
-             console.log(customSelectElemArr[i]);*/
-            customSelectArr[i] = new CustomSelect({
-                elem: customSelectElemArr[i]
-            });
-        }
-    }
-
-    var customInputRangeElemArr = document.querySelectorAll('.custom_input_range');
-    var customInputRangeArr = [];
-    if (customInputRangeElemArr.length > 0) {
-
-        for (var i = 0; i < customInputRangeElemArr.length; i++) {
-            /*console.log('Custom select ' + i +':');
-             console.log(customSelectElemArr[i]);*/
-            customInputRangeArr[i] = new CustomInputRange({
-                elem: customInputRangeElemArr[i],
-                max: 20,
-                min: 1,
-                initialValue: 10
-            });
-        }
-    }
-
     var tabsContainerElem = document.querySelector('.tabs_container');
     if (tabsContainerElem) {
         var tabs = new Tabs({
             elem: tabsContainerElem,
             transitionDuration: 0.15
+        });
+    }
+
+    var contactFormElem = document.querySelector('#contact_form');
+    if (contactFormElem) {
+        // console.log('========= CONTACT FORM =========');
+        var contactForm = new ContactFormController({
+            elem: contactFormElem
+        });
+    }
+
+    var divisionBoostElem = document.querySelector('#division');
+    if (divisionBoostElem) {
+        // console.log('========= DIVISION BOOST =========');
+        window.divisionBoost = new DivisionBoostController({
+            elem: divisionBoostElem
+        });
+    }
+
+    var winsBoostElem = document.querySelector('#wins');
+    if (divisionBoostElem) {
+        // console.log('========= WINS BOOST =========');
+        window.winsBoost = new WinsBoostController({
+            elem: winsBoostElem
+        });
+    }
+
+    var duoBoostElem = document.querySelector('#duo');
+    if (duoBoostElem) {
+        // console.log('========= DUO BOOST =========');
+        window.duoBoost = new DuoBoostController({
+            elem: duoBoostElem
         });
     }
 

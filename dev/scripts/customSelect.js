@@ -27,34 +27,22 @@ CustomSelect.prototype._onClick = function(event) {
 
     if (event.target === this._titleElem) {
         this._toggle();
-    } else if (event.target.tagName == 'LI') {
+    } else if (event.target.classList.contains('option')) {
         this._setValue(event.target.textContent, event.target.dataset.value);
         this._elem.classList.add('option_selected');
         this._close();
     }
 };
-// ------ обработчики ------
 
-// закрыть селект, если клик вне его
 CustomSelect.prototype._onDocumentClick = function(event) {
     if (!this._elem.contains(event.target)) this._close();
 };
 
-// ------------------------
-
 CustomSelect.prototype._setValue = function(title, value) {
     this._titleElem.innerHTML = title;
     this._elem.dataset.value = title;
+    this._value = value;
 
-    /*var widgetEvent = new CustomEvent('customselect', {
-        bubbles: true,
-        detail: {
-            title: title,
-            value: value
-        }
-    });
-
-    this._elem.dispatchEvent(widgetEvent);*/
     this._sendCustomEvent(this._elem, 'customselect', {
         bubbles: true,
         detail: {
@@ -62,6 +50,10 @@ CustomSelect.prototype._setValue = function(title, value) {
             value: value
         }
     });
+};
+
+CustomSelect.prototype.getElem = function() {
+    return this._elem;
 };
 
 CustomSelect.prototype._toggle = function() {
@@ -94,34 +86,58 @@ CustomSelect.prototype._close = function() {
 };
 
 CustomSelect.prototype._getOptionElems = function() {
-    return this._elem.querySelectorAll('li');
+    return this._elem.querySelectorAll('.option');
 };
 
-CustomSelect.prototype._setOption = function(optionIndex) {
-    if (typeof optionIndex !== 'number') return;
+CustomSelect.prototype.setOption = function(option) {
+    if (!option) return;
+
+    if (option.index && typeof option.index === 'number') {
+        // console.log('_setOptionByIndex');
+        this._setOptionByIndex(option.index);
+
+    } else if (option.value) {
+        // console.log('_setOptionByValue');
+        this._setOptionByValue(option.value);
+    }
+};
+
+CustomSelect.prototype._setOptionByIndex = function(optionIndex) {
+    var optionElemArr = this._getOptionElems();
 
     optionIndex = parseInt(optionIndex) + 1;
 
-    var optionElemArr = this._getOptionElems();
     if (optionElemArr[optionIndex]) {
         var option = optionElemArr[optionIndex];
 
         this._setValue(option.textContent, option.dataset.value);
         this._elem.classList.add('option_selected');
     } else {
-        this.resetToDefault();
+        // this.resetToDefault();
+    }
+};
+
+CustomSelect.prototype._setOptionByValue = function(optionValue) {
+    var optionElemArr = this._getOptionElems();
+
+    for (var i = 0; i < optionElemArr.length; i++) {
+        if (optionElemArr[i].dataset.value === optionValue) {
+            var option = optionElemArr[i];
+
+            this._setValue(option.textContent, option.dataset.value);
+            this._elem.classList.add('option_selected');
+
+            return;
+        }
     }
 
+    // this.resetToDefault();
 };
 
 CustomSelect.prototype.resetToDefault = function() {
     this._elem.classList.remove('option_selected');
     this._titleElem.innerHTML = this._defaultText;
     this._elem.dataset.value = '';
-};
-
-CustomSelect.prototype.returnElem = function() {
-    return this._elem;
 };
 
 CustomSelect.prototype.hideByDependency = function() {

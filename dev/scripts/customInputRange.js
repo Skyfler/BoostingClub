@@ -10,11 +10,20 @@ function CustomInputRange(options) {
     this._rulerElem = this._elem.querySelector('.ruler');
     this._thumbElem = this._elem.querySelector('.thumb');
 
-    this._min = options.min || 0;
-    this._max = options.max || 100;
+    // console.log('Min value from options:');
+    // console.log(options.min);
+    // console.log('Is NaN = ' + isNaN(parseInt(options.min)));
+    this._min = isNaN(parseInt(options.min)) ? 0 : parseInt(options.min);
+    // console.log('Max value from options:');
+    // console.log(options.max);
+    // console.log('Is NaN = ' + isNaN(parseInt(options.max)));
+    this._max = isNaN(parseInt(options.max)) ? 10 : parseInt(options.max);
     this._percentPerValue = 100 / (this._max - this._min);
 
-    var initialValue = options.initialValue || this._min;
+    // console.log('Default value from options:');
+    // console.log(options.initialValue);
+    // console.log('Is NaN = ' + isNaN(parseInt(options.initialValue)));
+    var initialValue = isNaN(parseInt(options.initialValue)) ? this._min : parseInt(options.initialValue);
     this.setValue(initialValue);
 
     this._onMouseDown = this._onMouseDown.bind(this);
@@ -72,12 +81,14 @@ CustomInputRange.prototype._moveTo = function(clientX) {
 
     var newValue = this._positionToValue(newLeft);
     if (newValue !== this._value) {
-        this._value = this._positionToValue(newLeft);
+        this._value = newValue;
         // console.log('Value slided to ' + this._value);
 
-        this._sendCustomEvent(this._elem, 'slide', {
+        this._sendCustomEvent(this._elem, 'custominputrangeslide', {
             bubbles: true,
-            detail: this._value
+            detail: {
+                value: this._value
+            }
         });
     }
 };
@@ -87,7 +98,7 @@ CustomInputRange.prototype._valueToPosition = function(value) {
 };
 
 CustomInputRange.prototype._positionToValue = function(left) {
-    var pixelPerValue = this._rulerElem.clientWidth / this._max - this._min;
+    var pixelPerValue = this._rulerElem.clientWidth / (this._max - this._min);
     return Math.round(left / pixelPerValue) + this._min;
 };
 
@@ -106,18 +117,34 @@ CustomInputRange.prototype._endDrag = function() {
 
 CustomInputRange.prototype._afterValueIsSet = function() {
     // console.log('Value fixed on ' + this._value);
-    this._sendCustomEvent(this._elem, 'change', {
+    this._sendCustomEvent(this._elem, 'custominputrangechange', {
         bubbles: true,
-        detail: this._value
+        detail: {
+            value: this._value
+        }
     });
 };
 
 CustomInputRange.prototype.setValue = function(value) {
+    value = parseInt(value);
+
+    if (typeof value !== 'number') return;
+
+    if (value > this._max) {
+        value = this._max;
+    } else if (value < this._min) {
+        value = this._min;
+    }
+
     this._value = value;
     this._thumbElem.style.left = this._valueToPosition(value) + '%';
     this._pixelLeft = parseInt(getComputedStyle(this._thumbElem).left);
 
     this._afterValueIsSet();
+};
+
+CustomInputRange.prototype.getElem = function() {
+    return this._elem;
 };
 
 module.exports = CustomInputRange;
