@@ -3,8 +3,8 @@
 var FormTemplate = require('./formTemplate');
 var TierImageController = require('./boostController-tierImage');
 var OptionsVisibilityController = require('./boostController-optionsVisibility');
-var InputRangeDisplay = require('./boostController-inputRange');
-var bcHelper = require('./boostController-helper');
+var ValueDisplay = require('./boostController-valueDisplay');
+var _bcHelper = require('./boostController-helper');
 
 function WinsBoostController(options) {
     FormTemplate.call(this, options);
@@ -14,12 +14,12 @@ function WinsBoostController(options) {
     this._getCustomInputs();
     this._createOptionsVisibilityControllers();
     this._createImageControllers();
-    this._createInputRangeDisplay();
+    this._createValueDisplays();
 
     this._setTier(
         'current',
-        bcHelper.LEAGUES.br.name,
-        bcHelper.DIVISIONS.d5.name
+        _bcHelper.LEAGUES.br.name,
+        _bcHelper.DIVISIONS.d5.name
     );
 
     this._onCustomSelect = this._onCustomSelect.bind(this);
@@ -29,8 +29,8 @@ function WinsBoostController(options) {
     this._addListener(this._elem, 'custominputrangeslide', this._onCustomInputRange);
     this._addListener(this._elem, 'custominputrangechange', this._onCustomInputRange);
 
-    this._currentLeagueSelect.setOption({value: bcHelper.LEAGUES.br.name});
-    this._currentDivisionSelect.setOption({value: bcHelper.DIVISIONS.d5.name});
+    this._currentLeagueSelect.setOption({value: _bcHelper.LEAGUES.br.name});
+    this._currentDivisionSelect.setOption({value: _bcHelper.DIVISIONS.d5.name});
     this._winsInputRange.setValue(10);
 }
 
@@ -40,7 +40,7 @@ WinsBoostController.prototype.constructor = WinsBoostController;
 WinsBoostController.prototype.remove = function() {
     this._destroyImageControllers();
     this._destroyOptionsControllers();
-    this._destroyInputRangeDisplay();
+    this._destroyValueDisplays();
 
     FormTemplate.prototype.remove.apply(this, arguments);
 };
@@ -51,9 +51,17 @@ WinsBoostController.prototype._destroyImageControllers = function() {
     }
 };
 
-WinsBoostController.prototype._destroyInputRangeDisplay = function() {
+WinsBoostController.prototype._destroyValueDisplays = function() {
     if (this._winsDisplay) {
         this._winsDisplay.remove();
+    }
+
+    if (this._descriptionDisplay) {
+        this._descriptionDisplay.remove();
+    }
+
+    if (this._priceDisplay) {
+        this._priceDisplay.remove();
     }
 };
 
@@ -98,8 +106,8 @@ WinsBoostController.prototype._getCustomInputs = function() {
 WinsBoostController.prototype._setTier = function(prefix, leagueName, divisionName) {
     if (!prefix || prefix !== 'current') return;
 
-    var leagueObj = bcHelper.findLeagueByName(leagueName),
-        divisionObj = bcHelper.findDivisionByName(divisionName);
+    var leagueObj = _bcHelper.findLeagueByName(leagueName),
+        divisionObj = _bcHelper.findDivisionByName(divisionName);
     // console.log(currentLeagueObj);
 
     if (!leagueObj || !divisionObj) return;
@@ -107,12 +115,12 @@ WinsBoostController.prototype._setTier = function(prefix, leagueName, divisionNa
     this['_' + prefix + 'League'] = leagueObj.name;
 
     if (
-        leagueObj === bcHelper.LEAGUES.unr ||
-        leagueObj === bcHelper.LEAGUES.ms ||
-        leagueObj === bcHelper.LEAGUES.chg
+        leagueObj === _bcHelper.LEAGUES.unr ||
+        leagueObj === _bcHelper.LEAGUES.ms ||
+        leagueObj === _bcHelper.LEAGUES.chg
     ) {
-        if (divisionObj !== bcHelper.DIVISIONS.d1) {
-            this['_' + prefix + 'DivisionSelect'].setOption({value: bcHelper.DIVISIONS.d1.name});
+        if (divisionObj !== _bcHelper.DIVISIONS.d1) {
+            this['_' + prefix + 'DivisionSelect'].setOption({value: _bcHelper.DIVISIONS.d1.name});
 
             return false;
         }
@@ -145,21 +153,21 @@ WinsBoostController.prototype._checkOptions = function() {
     // console.log('_checkOptions');
 
     if (
-        this._currentLeague === bcHelper.LEAGUES.unr.name ||
-        this._currentLeague === bcHelper.LEAGUES.ms.name ||
-        this._currentLeague === bcHelper.LEAGUES.chg.name
+        this._currentLeague === _bcHelper.LEAGUES.unr.name ||
+        this._currentLeague === _bcHelper.LEAGUES.ms.name ||
+        this._currentLeague === _bcHelper.LEAGUES.chg.name
     ) {
         // console.log('this._currentLeague has 1 division');
         this._currentDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS.d1.name,
-            bcHelper.DIVISIONS.d1.name,
+            _bcHelper.DIVISIONS.d1.name,
+            _bcHelper.DIVISIONS.d1.name,
             true
         );
     } else {
         // console.log('this._currentLeague has 5 divisions');
         this._currentDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS.d5.name,
-            bcHelper.DIVISIONS.d1.name
+            _bcHelper.DIVISIONS.d5.name,
+            _bcHelper.DIVISIONS.d1.name
         );
     }
 };
@@ -175,6 +183,8 @@ WinsBoostController.prototype._onCustomSelect = function(e) {
         this._setTierAndCheck('current', this._currentLeague, value);
 
     }
+
+    this._displayCalculatedValues();
 };
 
 WinsBoostController.prototype._onCustomInputRange = function(e) {
@@ -185,6 +195,8 @@ WinsBoostController.prototype._onCustomInputRange = function(e) {
         this._setWins(value);
 
     }
+
+    this._displayCalculatedValues();
 };
 
 WinsBoostController.prototype._setWins = function(value) {
@@ -199,10 +211,23 @@ WinsBoostController.prototype._createImageControllers = function() {
     });
 };
 
-WinsBoostController.prototype._createInputRangeDisplay = function() {
+WinsBoostController.prototype._createValueDisplays = function() {
     var winsDisplay = this._elem.querySelector('#wins-display');
-    this._winsDisplay = new InputRangeDisplay({
+    this._winsDisplay = new ValueDisplay({
         displayElem: winsDisplay
+    });
+
+    var descriptionDisplay = this._elem.querySelector('.display_description');
+    this._descriptionDisplay = new ValueDisplay({
+        displayElem: descriptionDisplay,
+        prefix: 'Wins Boost: '
+    });
+
+    var priceDisplay = this._elem.querySelector('.display_price');
+    this._priceDisplay = new ValueDisplay({
+        displayElem: priceDisplay,
+        prefix: 'Total Cost: <strong>',
+        suffix: '&euro;</strong>'
     });
 };
 
@@ -217,6 +242,45 @@ WinsBoostController.prototype._createOptionsVisibilityControllers = function() {
         selectElem: this._currentDivisionSelect.getElem(),
         optionsGroup: 'DIVISIONS'
     });
+};
+
+WinsBoostController.prototype._displayCalculatedValues = function() {
+    this._descriptionDisplay.showValue(this._createDescription());
+    this._priceDisplay.showValue(Math.floor(this._getTotalPrice()));
+};
+
+WinsBoostController.prototype._getTotalPrice = function() {
+    if (!this._currentLeague || !this._desiredWins) {
+        return 0;
+    }
+
+    return this._totalPriceSoloQBoost(this._currentLeague, _bcHelper.GAMES_OR_WINS.wns.name, this._desiredWins);
+};
+
+WinsBoostController.prototype._totalPriceSoloQBoost = function (currentLeagueName, gamesOrWins, desiredNumber) {
+    // console.log(currentLeagueName + ' ' + gamesOrWins + ' ' + desiredNumber);
+    var one = desiredNumber % 10;
+    var ten = (desiredNumber - one) / 10;
+
+    return _bcHelper.SOLOQ_PRICE[currentLeagueName][gamesOrWins][10] * ten + _bcHelper.SOLOQ_PRICE[currentLeagueName][gamesOrWins][1] * one;
+};
+
+WinsBoostController.prototype._createDescription = function() {
+    if (!this._currentLeague || !this._currentDivision || !this._desiredWins) return '';
+
+    return '{{currentLeagueName}} ({{currentDivisionName}}) - {{number}} {{suffix}}'.replace(
+        '{{currentLeagueName}}',
+        _bcHelper.LEAGUES[this._currentLeague].title
+    ).replace(
+        '{{currentDivisionName}}',
+        _bcHelper.DIVISIONS[this._currentDivision].title
+    ).replace(
+        '{{number}}',
+        this._desiredWins
+    ).replace(
+        '{{suffix}}',
+        _bcHelper.GAMES_OR_WINS.wns.title
+    );
 };
 
 module.exports = WinsBoostController;

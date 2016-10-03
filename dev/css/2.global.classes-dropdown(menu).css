@@ -64,7 +64,7 @@
     display: block;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
 
     .menu .dropdown_container {
         overflow-y: visible;

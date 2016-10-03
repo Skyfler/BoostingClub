@@ -19,6 +19,10 @@
     padding: 30px 0 55px;
 }
 
+.boost_services .boost_services_block_container .block_content {
+    display: block;
+}
+
 .boost_services .boost_services_block_container .block_content:after {
     content: "";
     display: none;

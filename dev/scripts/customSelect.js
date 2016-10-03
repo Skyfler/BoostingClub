@@ -158,5 +158,4 @@ CustomSelect.prototype.revealByDependency = function() {
     }
 };
 
-
 module.exports = CustomSelect;

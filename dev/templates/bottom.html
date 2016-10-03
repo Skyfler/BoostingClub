@@ -1,32 +1,20 @@
-<div class="payment_systems">
-    <ul class="container clr">
-        <!-- htmlmin:ignore -->
-        <li><img src="img/icon_paypal.png" class="responsive_img"></li>
-        <li><img src="img/icon_paysafe_card.png" class="responsive_img"></li>
-        <li><img src="img/icon_visa.png" class="responsive_img"></li>
-        <li><img src="img/icon_mastercard.png" class="responsive_img"></li>
-        <br>
-        <li><img src="img/icon_webmoney.png" class="responsive_img"></li>
-        <li><img src="img/icon_liqpay.png" class="responsive_img"></li>
-        <li><img src="img/icon_maestro.png" class="responsive_img"></li>
-        <li><img src="img/icon_discover.png" class="responsive_img"></li>
-        <!-- htmlmin:ignore -->
-    </ul>
+<!--[if !IE]>main_end<![endif]-->
+</div>
 </div>
 <section class="contact_us">
     <div class="container">
         <h2 class="block_main_title">contact us</h2>
         <form action="#" class="clr" id="contact_form">
             <div class="input_group">
-                <div id="category-select" class="customselect" name="Category" data-component="form-input">
+                <div id="category-select" class="customselect required" name="Category" data-component="form-input">
                     <button class="title">Question</button>
-                    <ul>
+                    <ul class="option_list">
                         <!-- значение хранится в свойстве data-value -->
-                        <li data-value="option_1">Question</li>
-                        <li data-value="option_2">Other</li>
-                        <li data-value="option_3">Other</li>
-                        <li data-value="option_4">Other</li>
-                        <li data-value="option_5">Other</li>
+                        <li class="option" data-value="option_1">Question</li>
+                        <li class="option" data-value="option_2">Other</li>
+                        <li class="option" data-value="option_3">Other</li>
+                        <li class="option" data-value="option_4">Other</li>
+                        <li class="option" data-value="option_5">Other</li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +22,7 @@
                 <input type="email" placeholder="Your email" class="required" name="Email" data-component="form-input">
             </div>
             <div class="input_group full_width">
-                <textarea placeholder="Message" name="Message" data-component="form-input"></textarea>
+                <textarea placeholder="Message" name="Message" class="required" data-component="form-input"></textarea>
             </div>
             <div class="input_group full_width">
                 <button type="submit" class="submit skew">
@@ -49,5 +37,21 @@
         </ul>
     </div>
 </section>
+<div class="scroll_up_btn">
+    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var $_Tawk_API={},$_Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/57ee3b5e0188071f8b856824/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

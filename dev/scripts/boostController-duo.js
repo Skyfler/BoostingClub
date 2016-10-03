@@ -3,8 +3,8 @@
 var FormTemplate = require('./formTemplate');
 var TierImageController = require('./boostController-tierImage');
 var OptionsVisibilityController = require('./boostController-optionsVisibility');
-var InputRangeDisplay = require('./boostController-inputRange');
-var bcHelper = require('./boostController-helper');
+var ValueDisplay = require('./boostController-valueDisplay');
+var _bcHelper = require('./boostController-helper');
 
 function DuoBoostController(options) {
     FormTemplate.call(this, options);
@@ -15,12 +15,12 @@ function DuoBoostController(options) {
     this._getCustomInputs();
     this._createOptionsVisibilityControllers();
     this._createImageControllers();
-    this._createInputRangeDisplay();
+    this._createValueDisplays();
 
     this._setTier(
         'current',
-        bcHelper.LEAGUES.br.name,
-        bcHelper.DIVISIONS.d5.name
+        _bcHelper.LEAGUES.br.name,
+        _bcHelper.DIVISIONS.d5.name
     );
 
     this._onCustomSelect = this._onCustomSelect.bind(this);
@@ -30,11 +30,11 @@ function DuoBoostController(options) {
     this._addListener(this._elem, 'custominputrangeslide', this._onCustomInputRange);
     this._addListener(this._elem, 'custominputrangechange', this._onCustomInputRange);
 
-    this._serverSelect.setOption({value: bcHelper.SERVERS.eu.name});
+    this._serverSelect.setOption({value: _bcHelper.SERVERS.eu.name});
     this._numberInputRange.setValue(5);
-    this._suffixSelect.setOption({value: bcHelper.GAMES_OR_WINS.gms.name});
-    this._currentLeagueSelect.setOption({value: bcHelper.LEAGUES.br.name});
-    this._currentDivisionSelect.setOption({value: bcHelper.DIVISIONS.d5.name});
+    this._suffixSelect.setOption({value: _bcHelper.GAMES_OR_WINS.gms.name});
+    this._currentLeagueSelect.setOption({value: _bcHelper.LEAGUES.br.name});
+    this._currentDivisionSelect.setOption({value: _bcHelper.DIVISIONS.d5.name});
 }
 
 DuoBoostController.prototype = Object.create(FormTemplate.prototype);
@@ -43,7 +43,7 @@ DuoBoostController.prototype.constructor = DuoBoostController;
 DuoBoostController.prototype.remove = function() {
     this._destroyImageControllers();
     this._destroyOptionsControllers();
-    this._destroyInputRangeDisplay();
+    this._destroyValueDisplays();
 
     FormTemplate.prototype.remove.apply(this, arguments);
 };
@@ -54,9 +54,17 @@ DuoBoostController.prototype._destroyImageControllers = function() {
     }
 };
 
-DuoBoostController.prototype._destroyInputRangeDisplay = function() {
-    if (this._duoDisplay) {
-        this._duoDisplay.remove();
+DuoBoostController.prototype._destroyValueDisplays = function() {
+    if (this._numberDisplay) {
+        this._numberDisplay.remove();
+    }
+
+    if (this._descriptionDisplay) {
+        this._descriptionDisplay.remove();
+    }
+
+    if (this._priceDisplay) {
+        this._priceDisplay.remove();
     }
 };
 
@@ -109,8 +117,8 @@ DuoBoostController.prototype._getCustomInputs = function() {
 DuoBoostController.prototype._setTier = function(prefix, leagueName, divisionName) {
     if (!prefix || prefix !== 'current') return;
 
-    var leagueObj = bcHelper.findLeagueByName(leagueName),
-        divisionObj = bcHelper.findDivisionByName(divisionName);
+    var leagueObj = _bcHelper.findLeagueByName(leagueName),
+        divisionObj = _bcHelper.findDivisionByName(divisionName);
     // console.log(currentLeagueObj);
 
     if (!leagueObj || !divisionObj) return;
@@ -118,12 +126,12 @@ DuoBoostController.prototype._setTier = function(prefix, leagueName, divisionNam
     this['_' + prefix + 'League'] = leagueObj.name;
 
     if (
-        leagueObj === bcHelper.LEAGUES.unr ||
-        leagueObj === bcHelper.LEAGUES.ms ||
-        leagueObj === bcHelper.LEAGUES.chg
+        leagueObj === _bcHelper.LEAGUES.unr ||
+        leagueObj === _bcHelper.LEAGUES.ms ||
+        leagueObj === _bcHelper.LEAGUES.chg
     ) {
-        if (divisionObj !== bcHelper.DIVISIONS.d1) {
-            this['_' + prefix + 'DivisionSelect'].setOption({value: bcHelper.DIVISIONS.d1.name});
+        if (divisionObj !== _bcHelper.DIVISIONS.d1) {
+            this['_' + prefix + 'DivisionSelect'].setOption({value: _bcHelper.DIVISIONS.d1.name});
 
             return false;
         }
@@ -156,21 +164,21 @@ DuoBoostController.prototype._checkOptions = function() {
     // console.log('_checkOptions');
 
     if (
-        this._currentLeague === bcHelper.LEAGUES.unr.name ||
-        this._currentLeague === bcHelper.LEAGUES.ms.name ||
-        this._currentLeague === bcHelper.LEAGUES.chg.name
+        this._currentLeague === _bcHelper.LEAGUES.unr.name ||
+        this._currentLeague === _bcHelper.LEAGUES.ms.name ||
+        this._currentLeague === _bcHelper.LEAGUES.chg.name
     ) {
         // console.log('this._currentLeague has 1 division');
         this._currentDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS.d1.name,
-            bcHelper.DIVISIONS.d1.name,
+            _bcHelper.DIVISIONS.d1.name,
+            _bcHelper.DIVISIONS.d1.name,
             true
         );
     } else {
         // console.log('this._currentLeague has 5 divisions');
         this._currentDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS.d5.name,
-            bcHelper.DIVISIONS.d1.name
+            _bcHelper.DIVISIONS.d5.name,
+            _bcHelper.DIVISIONS.d1.name
         );
     }
 };
@@ -189,9 +197,11 @@ DuoBoostController.prototype._onCustomSelect = function(e) {
         this._setServer(value);
 
     } else if (target === this._suffixSelect.getElem()) {
-        this._setSuffix(value);
+        this._setNumberSuffix(value);
 
     }
+
+    this._displayCalculatedValues();
 };
 
 DuoBoostController.prototype._onCustomInputRange = function(e) {
@@ -202,25 +212,27 @@ DuoBoostController.prototype._onCustomInputRange = function(e) {
         this._setWins(value);
 
     }
+
+    this._displayCalculatedValues();
 };
 
 DuoBoostController.prototype._setServer = function(server) {
-    if (bcHelper.SERVERS.hasOwnProperty(server)) {
+    if (_bcHelper.SERVERS.hasOwnProperty(server)) {
         this._server = server;
     }
 };
 
-DuoBoostController.prototype._setSuffix = function(suffix) {
-    if (bcHelper.GAMES_OR_WINS.hasOwnProperty(suffix)) {
-        this._suffix = bcHelper.GAMES_OR_WINS[suffix].title;
-        this._duoDisplay.setSuffix(this._suffix);
-        this._duoDisplay.showValue(this._desiredNumber);
+DuoBoostController.prototype._setNumberSuffix = function(suffix) {
+    if (_bcHelper.GAMES_OR_WINS.hasOwnProperty(suffix)) {
+        this._numberSuffix = _bcHelper.GAMES_OR_WINS[suffix].name;
+        this._numberDisplay.setSuffix(' ' + _bcHelper.GAMES_OR_WINS[suffix].title);
+        this._numberDisplay.showValue(this._desiredNumber);
     }
 };
 
 DuoBoostController.prototype._setWins = function(value) {
     this._desiredNumber = value;
-    this._duoDisplay.showValue(this._desiredNumber);
+    this._numberDisplay.showValue(this._desiredNumber);
 };
 
 DuoBoostController.prototype._createImageControllers = function() {
@@ -230,13 +242,25 @@ DuoBoostController.prototype._createImageControllers = function() {
     });
 };
 
-DuoBoostController.prototype._createInputRangeDisplay = function() {
-    var winsDisplay = this._elem.querySelector('#duo-display');
-    this._duoDisplay = new InputRangeDisplay({
-        displayElem: winsDisplay
+DuoBoostController.prototype._createValueDisplays = function() {
+    var numberDisplay = this._elem.querySelector('#duo-display');
+    this._numberDisplay = new ValueDisplay({
+        displayElem: numberDisplay
+    });
+
+    var descriptionDisplay = this._elem.querySelector('.display_description');
+    this._descriptionDisplay = new ValueDisplay({
+        displayElem: descriptionDisplay,
+        prefix: 'Duoq Boost: '
+    });
+
+    var priceDisplay = this._elem.querySelector('.display_price');
+    this._priceDisplay = new ValueDisplay({
+        displayElem: priceDisplay,
+        prefix: 'Total Cost: <strong>',
+        suffix: '&euro;</strong>'
     });
 };
-
 
 DuoBoostController.prototype._createOptionsVisibilityControllers = function() {
     this._currentLeagueOptionsController = new OptionsVisibilityController({
@@ -248,6 +272,45 @@ DuoBoostController.prototype._createOptionsVisibilityControllers = function() {
         selectElem: this._currentDivisionSelect.getElem(),
         optionsGroup: 'DIVISIONS'
     });
+};
+
+DuoBoostController.prototype._displayCalculatedValues = function() {
+    this._descriptionDisplay.showValue(this._createDescription());
+    this._priceDisplay.showValue(Math.floor(this._getTotalPrice()));
+};
+
+DuoBoostController.prototype._getTotalPrice = function() {
+    if (!this._currentLeague || !this._numberSuffix || !this._desiredNumber) {
+        return 0;
+    }
+
+    return this._totalPriceDuoQBoost(this._currentLeague, this._numberSuffix, this._desiredNumber);
+};
+
+DuoBoostController.prototype._totalPriceDuoQBoost = function (currentLeagueName, gamesOrWins, desiredNumber) {
+    // console.log(currentLeagueName + ' ' + gamesOrWins + ' ' + desiredNumber);
+    var one = desiredNumber % 10;
+    var ten = (desiredNumber - one) / 10;
+
+    return _bcHelper.DUOQ_PRICE[currentLeagueName][gamesOrWins][10] * ten + _bcHelper.DUOQ_PRICE[currentLeagueName][gamesOrWins][1] * one;
+};
+
+DuoBoostController.prototype._createDescription = function() {
+    if (!this._currentLeague || !this._currentDivision || !this._desiredNumber || !this._numberSuffix) return '';
+
+    return '{{currentLeagueName}} ({{currentDivisionName}}) - {{number}} {{suffix}}'.replace(
+        '{{currentLeagueName}}',
+        _bcHelper.LEAGUES[this._currentLeague].title
+    ).replace(
+        '{{currentDivisionName}}',
+        _bcHelper.DIVISIONS[this._currentDivision].title
+    ).replace(
+        '{{number}}',
+        this._desiredNumber
+    ).replace(
+        '{{suffix}}',
+        _bcHelper.GAMES_OR_WINS[this._numberSuffix].title
+    );
 };
 
 module.exports = DuoBoostController;

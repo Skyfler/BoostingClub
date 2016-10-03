@@ -1,0 +1,41 @@
+.error404 {
+    padding: 0 0 100px;
+}
+
+.error404 .title {
+    font-size: 7em;
+    color: #141558;
+    font-weight: 600;
+}
+
+.error404 p {
+    font-size: 2em;
+    font-weight: 300;
+    color: #72b22b;
+}
+
+.error404 p a {
+    font-weight: 500;
+    color: #141558;
+    transition: color ease 1s;
+}
+
+.error404 p a:hover {
+    color: #72b22b;
+}
+
+@media screen and (min-width: 420px) {
+
+    .error404 .title {
+        font-size: 11em;
+    }
+
+}
+
+@media screen and (min-width: 700px) {
+
+    .error404 .title {
+        font-size: 18em;
+    }
+
+}

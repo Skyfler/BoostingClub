@@ -3,7 +3,8 @@
 var FormTemplate = require('./formTemplate');
 var TierImageController = require('./boostController-tierImage');
 var OptionsVisibilityController = require('./boostController-optionsVisibility');
-var bcHelper = require('./boostController-helper');
+var ValueDisplay = require('./boostController-valueDisplay');
+var _bcHelper = require('./boostController-helper');
 
 function DivisionBoostController(options) {
     FormTemplate.call(this, options);
@@ -14,20 +15,21 @@ function DivisionBoostController(options) {
     this._getCustomInputs();
     this._createOptionsVisibilityControllers();
     this._createImageControllers();
+    this._createValueDisplays();
 
     this._setTier(
         'current',
-        bcHelper.LEAGUES.br.name,
-        bcHelper.DIVISIONS.d5.name
+        _bcHelper.LEAGUES.br.name,
+        _bcHelper.DIVISIONS.d5.name
     );
 
     this._onCustomSelect = this._onCustomSelect.bind(this);
 
     this._addListener(this._elem, 'customselect', this._onCustomSelect);
 
-    this._currentLeagueSelect.setOption({value: bcHelper.LEAGUES.br.name});
-    this._currentDivisionSelect.setOption({value: bcHelper.DIVISIONS.d5.name});
-    this._currentLPSelect.setOption({value: bcHelper.LP.lp0.name});
+    this._currentLeagueSelect.setOption({value: _bcHelper.LEAGUES.br.name});
+    this._currentDivisionSelect.setOption({value: _bcHelper.DIVISIONS.d5.name});
+    this._currentLPSelect.setOption({value: _bcHelper.LP.lp0.name});
 }
 
 DivisionBoostController.prototype = Object.create(FormTemplate.prototype);
@@ -36,6 +38,7 @@ DivisionBoostController.prototype.constructor = DivisionBoostController;
 DivisionBoostController.prototype.remove = function() {
     this._destroyImageControllers();
     this._destroyOptionsControllers();
+    this._destroyValueDisplays();
 
     FormTemplate.prototype.remove.apply(this, arguments);
 };
@@ -47,6 +50,16 @@ DivisionBoostController.prototype._destroyImageControllers = function() {
 
     if (this._desiredTierImageController) {
         this._desiredTierImageController.remove();
+    }
+};
+
+DivisionBoostController.prototype._destroyValueDisplays = function() {
+    if (this._descriptionDisplay) {
+        this._descriptionDisplay.remove();
+    }
+
+    if (this._priceDisplay) {
+        this._priceDisplay.remove();
     }
 };
 
@@ -101,8 +114,8 @@ DivisionBoostController.prototype._getCustomInputs = function() {
 DivisionBoostController.prototype._setTier = function(prefix, leagueName, divisionName) {
     if (!prefix || (prefix !== 'current' && prefix !== 'desired')) return;
 
-    var leagueObj = bcHelper.findLeagueByName(leagueName),
-        divisionObj = bcHelper.findDivisionByName(divisionName);
+    var leagueObj = _bcHelper.findLeagueByName(leagueName),
+        divisionObj = _bcHelper.findDivisionByName(divisionName);
     // console.log(currentLeagueObj);
 
     if (!leagueObj || !divisionObj) return;
@@ -110,12 +123,12 @@ DivisionBoostController.prototype._setTier = function(prefix, leagueName, divisi
     this['_' + prefix + 'League'] = leagueObj.name;
 
     if (
-        leagueObj === bcHelper.LEAGUES.unr ||
-        leagueObj === bcHelper.LEAGUES.ms ||
-        leagueObj === bcHelper.LEAGUES.chg
+        leagueObj === _bcHelper.LEAGUES.unr ||
+        leagueObj === _bcHelper.LEAGUES.ms ||
+        leagueObj === _bcHelper.LEAGUES.chg
     ) {
-        if (divisionObj !== bcHelper.DIVISIONS.d1) {
-            this['_' + prefix + 'DivisionSelect'].setOption({value: bcHelper.DIVISIONS.d1.name});
+        if (divisionObj !== _bcHelper.DIVISIONS.d1) {
+            this['_' + prefix + 'DivisionSelect'].setOption({value: _bcHelper.DIVISIONS.d1.name});
 
             return false;
         }
@@ -147,10 +160,10 @@ DivisionBoostController.prototype._setTierAndCheck = function(prefix, leagueName
 
     if (this._currentTierWeight >= this._desiredTierWeight) {
         // console.log('this._currentTierWeight >= this._desiredTierWeight');
-        var currentTierWeightObj = bcHelper.parseTierWeight(this._currentTierWeight);
+        var currentTierWeightObj = _bcHelper.parseTierWeight(this._currentTierWeight);
         // console.log(currentTierWeightObj);
 
-        var newDesiredDivision = bcHelper.findDivisionByWeight(currentTierWeightObj.divisionWeight + 1),
+        var newDesiredDivision = _bcHelper.findDivisionByWeight(currentTierWeightObj.divisionWeight + 1),
             newDesiredDivisionName,
             newDesiredLeagueName;
 
@@ -159,10 +172,10 @@ DivisionBoostController.prototype._setTierAndCheck = function(prefix, leagueName
             newDesiredLeagueName = this._currentLeague;
 
         } else {
-            var newDesiredLeague = bcHelper.findLeagueByWeight(currentTierWeightObj.leagueWeight + 10);
+            var newDesiredLeague = _bcHelper.findLeagueByWeight(currentTierWeightObj.leagueWeight + 10);
 
             if (newDesiredLeague) {
-                newDesiredDivisionName = bcHelper.DIVISIONS.d5.name;
+                newDesiredDivisionName = _bcHelper.DIVISIONS.d5.name;
                 newDesiredLeagueName = newDesiredLeague.name;
 
             } else {
@@ -186,59 +199,59 @@ DivisionBoostController.prototype._checkOptions = function() {
     // console.log('_checkOptions');
 
     if (
-        this._currentLeague === bcHelper.LEAGUES.unr.name ||
-        this._currentLeague === bcHelper.LEAGUES.ms.name ||
-        this._currentLeague === bcHelper.LEAGUES.chg.name
+        this._currentLeague === _bcHelper.LEAGUES.unr.name ||
+        this._currentLeague === _bcHelper.LEAGUES.ms.name ||
+        this._currentLeague === _bcHelper.LEAGUES.chg.name
     ) {
         // console.log('this._currentLeague has 1 division');
         this._currentDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS.d1.name,
-            bcHelper.DIVISIONS.d1.name,
+            _bcHelper.DIVISIONS.d1.name,
+            _bcHelper.DIVISIONS.d1.name,
             true
         );
     } else {
         // console.log('this._currentLeague has 5 divisions');
         this._currentDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS.d5.name,
-            bcHelper.DIVISIONS.d1.name
+            _bcHelper.DIVISIONS.d5.name,
+            _bcHelper.DIVISIONS.d1.name
         );
     }
 
     if (this._currentLeague === this._desiredLeague) {
         // console.log('this._currentLeague === this._desiredLeague');
         this._desiredDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS_LIST[bcHelper.DIVISIONS_LIST.indexOf(this._currentDivision) + 1],
-            bcHelper.DIVISIONS.d1.name
+            _bcHelper.DIVISIONS_LIST[_bcHelper.DIVISIONS_LIST.indexOf(this._currentDivision) + 1],
+            _bcHelper.DIVISIONS.d1.name
         );
     } else {
         // console.log('this._currentLeague !== this._desiredLeague');
         this._desiredDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS.d5.name,
-            bcHelper.DIVISIONS.d1.name
+            _bcHelper.DIVISIONS.d5.name,
+            _bcHelper.DIVISIONS.d1.name
         );
     }
 
-    if (this._currentDivision === bcHelper.DIVISIONS.d1.name) {
+    if (this._currentDivision === _bcHelper.DIVISIONS.d1.name) {
         this._desiredLeagueOptionsController.showOptions(
-            bcHelper.LEAGUES_LIST[bcHelper.LEAGUES_LIST.indexOf(this._currentLeague) + 1],
-            bcHelper.LEAGUES.ms.name
+            _bcHelper.LEAGUES_LIST[_bcHelper.LEAGUES_LIST.indexOf(this._currentLeague) + 1],
+            _bcHelper.LEAGUES.ms.name
         );
     } else {
         this._desiredLeagueOptionsController.showOptions(
-            bcHelper.LEAGUES_LIST[bcHelper.LEAGUES_LIST.indexOf(this._currentLeague)],
-            bcHelper.LEAGUES.ms.name
+            _bcHelper.LEAGUES_LIST[_bcHelper.LEAGUES_LIST.indexOf(this._currentLeague)],
+            _bcHelper.LEAGUES.ms.name
         );
     }
 
     if (
-        this._desiredLeague === bcHelper.LEAGUES.unr.name ||
-        this._desiredLeague === bcHelper.LEAGUES.ms.name ||
-        this._desiredLeague === bcHelper.LEAGUES.chg.name
+        this._desiredLeague === _bcHelper.LEAGUES.unr.name ||
+        this._desiredLeague === _bcHelper.LEAGUES.ms.name ||
+        this._desiredLeague === _bcHelper.LEAGUES.chg.name
     ) {
         // console.log('this._desiredLeague has 1 division');
         this._desiredDivisionOptionsController.showOptions(
-            bcHelper.DIVISIONS.d1.name,
-            bcHelper.DIVISIONS.d1.name,
+            _bcHelper.DIVISIONS.d1.name,
+            _bcHelper.DIVISIONS.d1.name,
             true
         );
     }
@@ -263,11 +276,13 @@ DivisionBoostController.prototype._onCustomSelect = function(e) {
     } else if (target === this._currentLPSelect.getElem()) {
         this._setCurrentLP(value);
     }
+
+    this._displayCalculatedValues();
 };
 
 DivisionBoostController.prototype._setCurrentLP = function(lpValue) {
-    if (bcHelper.LP.hasOwnProperty(lpValue)) {
-        this._lp = bcHelper.LP[lpValue].name;
+    if (_bcHelper.LP.hasOwnProperty(lpValue)) {
+        this._lp = _bcHelper.LP[lpValue].name;
     }
 };
 
@@ -281,7 +296,21 @@ DivisionBoostController.prototype._createImageControllers = function() {
     this._desiredTierImageController = new TierImageController({
         imageElem: desiredTierImage
     });
+};
 
+DivisionBoostController.prototype._createValueDisplays = function() {
+    var descriptionDisplay = this._elem.querySelector('.display_description');
+    this._descriptionDisplay = new ValueDisplay({
+        displayElem: descriptionDisplay,
+        prefix: 'Division Boost: '
+    });
+
+    var priceDisplay = this._elem.querySelector('.display_price');
+    this._priceDisplay = new ValueDisplay({
+        displayElem: priceDisplay,
+        prefix: 'Total Cost: <strong>',
+        suffix: '&euro;</strong>'
+    });
 };
 
 DivisionBoostController.prototype._createOptionsVisibilityControllers = function() {
@@ -304,6 +333,68 @@ DivisionBoostController.prototype._createOptionsVisibilityControllers = function
         selectElem: this._desiredDivisionSelect.getElem(),
         optionsGroup: 'DIVISIONS'
     });
+};
+
+DivisionBoostController.prototype._displayCalculatedValues = function() {
+    this._descriptionDisplay.showValue(this._createDescription());
+    this._priceDisplay.showValue(Math.floor(this._getTotalPrice()));
+};
+
+DivisionBoostController.prototype._getTotalPrice = function() {
+    if (!this._currentLeague || !this._currentDivision || !this._desiredLeague || !this._desiredDivision || !this._lp) {
+        return 0;
+    }
+
+    return this._totalPriceDivisionBoost(this._currentLeague, this._currentDivision, this._desiredLeague, this._desiredDivision, this._lp);
+};
+
+DivisionBoostController.prototype._totalPriceDivisionBoost = function (currentLeagueName, currentDivisionName, desiredLeagueName, desiredDivisionName, currentLp) {
+    // console.log(currentLeagueName + ' ' + currentDivisionName + ' ' + desiredLeagueName + ' ' + desiredDivisionName + ' ' + currentLp);
+    if (currentLeagueName === desiredLeagueName && currentDivisionName === desiredDivisionName) {
+        return 0;
+
+    } else {
+        var nextCurrentLeagueName,
+            nextCurrentDivisionName;
+
+        if (currentDivisionName === _bcHelper.DIVISIONS.d1.name) {
+            nextCurrentLeagueName = _bcHelper.LEAGUES_LIST[_bcHelper.LEAGUES_LIST.indexOf(currentLeagueName) + 1];
+            nextCurrentDivisionName = _bcHelper.DIVISIONS.d5.name;
+        } else {
+            nextCurrentLeagueName = currentLeagueName;
+            nextCurrentDivisionName = _bcHelper.DIVISIONS_LIST[_bcHelper.DIVISIONS_LIST.indexOf(currentDivisionName) + 1];
+        }
+
+        if (
+            nextCurrentLeagueName === _bcHelper.LEAGUES.unr.name ||
+            nextCurrentLeagueName === _bcHelper.LEAGUES.ms.name ||
+            nextCurrentLeagueName === _bcHelper.LEAGUES.chg.name
+        ) {
+            nextCurrentDivisionName = _bcHelper.DIVISIONS.d1.name;
+        }
+
+        return _bcHelper.DIVISION_PRICES[currentLeagueName][currentDivisionName] * _bcHelper.LP[currentLp].multiplier +
+            this._totalPriceDivisionBoost(nextCurrentLeagueName, nextCurrentDivisionName, desiredLeagueName, desiredDivisionName, _bcHelper.LP.lp0.name);
+
+    }
+};
+
+DivisionBoostController.prototype._createDescription = function() {
+    if (!this._currentLeague || !this._currentDivision || !this._desiredLeague || !this._desiredDivision) return '';
+
+    return '{{currentLeagueName}} ({{currentDivisionName}}) -> {{desiredLeagueName}} ({{desiredDivisionName}})'.replace(
+        '{{currentLeagueName}}',
+        _bcHelper.LEAGUES[this._currentLeague].title
+    ).replace(
+        '{{currentDivisionName}}',
+        _bcHelper.DIVISIONS[this._currentDivision].title
+    ).replace(
+        '{{desiredLeagueName}}',
+        _bcHelper.LEAGUES[this._desiredLeague].title
+    ).replace(
+        '{{desiredDivisionName}}',
+        _bcHelper.DIVISIONS[this._desiredDivision].title
+    );
 };
 
 module.exports = DivisionBoostController;

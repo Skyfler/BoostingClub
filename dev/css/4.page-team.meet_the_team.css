@@ -11,6 +11,7 @@
 .meet_the_team .meet_the_team_block_container .block {
     float: left;
     width: 100%;
+    position: relative;
 }
 
 .meet_the_team .meet_the_team_block_container .block+.block {
@@ -67,6 +68,88 @@
     color: #fff;
 }
 
+.meet_the_team .meet_the_team_block_container .roles_list {
+    margin-top: 20px;
+}
+
+.meet_the_team .meet_the_team_block_container .roles_list li {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    background: url('../img/sprites/roles_list_sprite.png') no-repeat;
+}
+.meet_the_team .meet_the_team_block_container .roles_list li+li {
+    margin-left: 10px;
+}
+.meet_the_team .meet_the_team_block_container .roles_list li.mid {
+    /*background-image: ;*/
+    background-position: 0 0;
+}
+.meet_the_team .meet_the_team_block_container .roles_list li.support {
+    /*background-image: ;*/
+    background-position: -38px 0;
+}
+.meet_the_team .meet_the_team_block_container .roles_list li.marksman {
+    /*background-image: ;*/
+    background-position: -76px 0;
+}
+.meet_the_team .meet_the_team_block_container .roles_list li.top {
+    /*background-image: ;*/
+    background-position: -114px 0;
+}
+.meet_the_team .meet_the_team_block_container .roles_list li.jungle {
+    /*background-image: ;*/
+    background-position: -152px 0;
+}
+
+@keyframes show_by_fade_in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.meet_the_team .meet_the_team_block_container .about {
+    position: absolute;
+    border: 1px solid #fff;
+    max-width: 350px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #141558;
+    color: transparent;
+    font-size: 1.6em;
+    font-weight: 100;
+    box-shadow:
+            0 0 8px 2px #fff,
+            inset 0 0 6px 1px #fff;
+    border-radius: 4px;
+    z-index: 1;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    display: none;
+    cursor: default;
+    transition: color ease 0.5s;
+    overflow: hidden;
+}
+.meet_the_team .meet_the_team_block_container .about.block_visible {
+    display: block;
+}
+.meet_the_team .meet_the_team_block_container .about.text_visible {
+    color: white;
+}
+
+.meet_the_team .meet_the_team_block_container .about .height_container {
+    transition: height ease 0.5s;
+}
+
+.meet_the_team .meet_the_team_block_container .about .height_sample_elem {
+    padding: 45px 20px;
+}
+
 @media screen and (max-width: 800px) {
 
     .meet_the_team .skew_m7,
@@ -94,6 +177,11 @@
     }
     .meet_the_team .meet_the_team_block_container .block+.block+.block .block_content {
         width: 45%;
+    }
+
+    .meet_the_team .meet_the_team_block_container .about {
+        width: 90%;
+        max-width: 380px;
     }
 
 }

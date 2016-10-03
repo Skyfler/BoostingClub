@@ -105,4 +105,20 @@ Helper.prototype._sendCustomEvent = function(elem, eventName, options) {
     elem.dispatchEvent(widgetEvent);
 };
 
+Helper.prototype._loadImages = function(imgSrcArr) {
+    if (!imgSrcArr) return;
+
+    if (typeof imgSrcArr === 'string') {
+        imgSrcArr = [imgSrcArr];
+    }
+
+    this._preloadedImages = [];
+
+    for (var i = 0; i < imgSrcArr.length; i++) {
+        this._preloadedImages[i] = new Image();
+        this._preloadedImages[i].src = imgSrcArr[i];
+
+    }
+};
+
 module.exports = Helper;

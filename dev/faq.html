@@ -1,9 +1,12 @@
 @@include('./templates/top1.html')
 <title>Frequently Asked Questions</title>
 @@include('./templates/top2.html')
-<header class="faq-active">
-    @@include('./templates/headerInnerHTML.html')
+<header>
+    <nav class="closed menu clr container" id="main_menu" data-active-item="faq">
+        @@include('./templates/headerInnerHTML.html')
+    </nav>
 </header>
+@@include('./templates/top3.html')
 <section class="frequently_asked_questions">
     <div class="container">
         <h2 class="block_main_title remove_padding">Frequently Asked Questions</h2>

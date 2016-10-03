@@ -42,21 +42,35 @@ header.fixed {
     margin: 0 -15px;
     padding: 0 15px;
     border-bottom: 1px solid #ddd;
+    height: 77px;
+}
+
+#main_menu .navbar_header h1 {
+    height: 100%;
 }
 
 #main_menu .navbar_header .navbar_brand {
     height: 100%;
     display: block;
-    padding: 25px 0 24px;
-    float: right;
+    /*padding: 25px 0 24px;*/
+    float: left;
+}
+
+#main_menu .navbar_header .navbar_brand:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
 
 #main_menu .navbar_header .navbar_brand .logo_l {
     display: none;
+    vertical-align: middle;
 }
 
 #main_menu .navbar_header .navbar_brand .logo_s {
-    display: block;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 #main_menu .navbar_header .dropdown_toggle {
@@ -65,7 +79,7 @@ header.fixed {
     background-image: none;
     border: none;
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
     transition: background ease 0.5s;
 }
@@ -101,11 +115,44 @@ header.fixed {
     color: #141558;
     text-transform: uppercase;
     padding: 10px 0 10px 25px;
-    transition-duration: 0.5s;
+    transition-duration: 1s;
+    position: relative;
+    overflow: hidden;
+}
+#main_menu[data-active-item="home"] .menu_bar>li>a.home,
+#main_menu[data-active-item="boosting"] .menu_bar>li>a.boosting,
+#main_menu[data-active-item="services"] .menu_bar>li>a.services,
+#main_menu[data-active-item="team"] .menu_bar>li>a.team,
+#main_menu[data-active-item="faq"] .menu_bar>li>a.faq,
+#main_menu[data-active-item="contact"] .menu_bar>li>a.contact {
+    color: white!important;
+}
+
+#main_menu .menu_bar>li>a:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /*opacity: 0;*/
+    top: -100%;
+    left: 0;
+    transition: top ease 1s;
+    background: linear-gradient(to bottom, #344d25, #9bf62e);
+}
+#main_menu[data-active-item="home"] .menu_bar>li>a.home:after,
+#main_menu[data-active-item="boosting"] .menu_bar>li>a.boosting:after,
+#main_menu[data-active-item="services"] .menu_bar>li>a.services:after,
+#main_menu[data-active-item="team"] .menu_bar>li>a.team:after,
+#main_menu[data-active-item="faq"] .menu_bar>li>a.faq:after,
+#main_menu[data-active-item="contact"] .menu_bar>li>a.contact:after {
+    /*opacity: 1;*/
+    top: 0;
 }
 
 #main_menu .menu_bar>li>a span {
     height: auto;
+    position: relative;
+    z-index: 1;
 }
 
 #main_menu .menu_bar>li:hover>a {
@@ -113,18 +160,21 @@ header.fixed {
     /*background: rgba(39, 145, 242, 0.39);*/
 }
 
-header.home-active .home,
-header.boosting-active .boosting,
-header.services-active .services,
-header.team-active .team,
-header.faq-active .faq,
-header.contact-active .contact {
-    background: linear-gradient(to bottom, #344d25, #9bf62e);
-    color: white!important;
-}
-
 header.fixed #main_menu .navbar_header .dropdown_toggle {
     padding: 20px 15px 20px;
+}
+
+
+@media screen and (min-width: 400px) {
+
+    #main_menu .navbar_header .navbar_brand .logo_l {
+        display: inline-block;
+    }
+
+    #main_menu .navbar_header .navbar_brand .logo_s {
+        display: none;
+    }
+
 }
 
 @media screen and (min-width: 768px) {
@@ -146,13 +196,9 @@ header.fixed #main_menu .navbar_header .dropdown_toggle {
         margin: 0 -30px;
     }
 
-    #main_menu .navbar_header .dropdown_toggle {
-        right: 30px;
-    }
-
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
 
     #main_menu .skew,
     #main_menu .skew .unskew {
@@ -161,7 +207,7 @@ header.fixed #main_menu .navbar_header .dropdown_toggle {
 
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
 
     header {
         border-bottom: 1px solid #161616;
@@ -176,21 +222,22 @@ header.fixed #main_menu .navbar_header .dropdown_toggle {
         height: 100%;
     }
 
-    #main_menu .navbar_header .navbar_brand {
-        font-size: 4em;
-        padding: 33px 0 0;
-        float: none;
-    }
-
-    #main_menu .navbar_header .navbar_brand img {
-        height: auto;
-    }
-
     #main_menu .navbar_header {
         float: left;
         margin: 0;
         padding: 0;
         border: none;
+        height: 100%;
+    }
+
+    #main_menu .navbar_header .navbar_brand {
+        font-size: 4em;
+        /*padding: 33px 0 0;*/
+        float: none;
+    }
+
+    #main_menu .navbar_header .navbar_brand img {
+        height: auto;
     }
 
     #main_menu .menu_bar {
@@ -229,18 +276,6 @@ header.fixed #main_menu .navbar_header .dropdown_toggle {
 
     header.fixed #main_menu .menu_bar > li > a {
         padding: 28px 0 0;
-    }
-
-}
-
-@media screen and (min-width: 890px) {
-
-    #main_menu .navbar_header .navbar_brand .logo_l {
-        display: block;
-    }
-
-    #main_menu .navbar_header .navbar_brand .logo_s {
-        display: none;
     }
 
 }

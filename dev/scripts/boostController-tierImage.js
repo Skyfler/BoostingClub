@@ -1,7 +1,7 @@
 "use strict";
 
 var Helper = require('./helper');
-var bcHelper = require('./boostController-helper');
+var _bcHelper = require('./boostController-helper');
 
 function TierImageController(options) {
     Helper.call(this, options);
@@ -13,9 +13,9 @@ TierImageController.prototype = Object.create(Helper.prototype);
 TierImageController.prototype.constructor = TierImageController;
 
 TierImageController.prototype.setImage = function(league, division) {
-    if (!this._imageElem || !bcHelper.IMAGES_SRC[league] || !bcHelper.IMAGES_SRC[league][division]) return;
+    if (!this._imageElem || !_bcHelper.IMAGES_SRC[league] || !_bcHelper.IMAGES_SRC[league][division]) return;
 
-    this._imageElem.src = bcHelper.IMAGES_SRC[league][division];
+    this._imageElem.src = _bcHelper.IMAGES_SRC[league][division];
 };
 
 module.exports = TierImageController;

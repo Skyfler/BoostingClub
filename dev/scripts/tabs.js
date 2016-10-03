@@ -10,7 +10,7 @@ function Tabs(options) {
 
     this._onClick = this._onClick.bind(this);
 
-    this._init();
+    this._init(options.initialTabNum ? options.initialTabNum - 1 : 0);
 
     this._addListener(this._elem, 'click', this._onClick);
 }
@@ -29,10 +29,11 @@ Tabs.prototype._onClick = function(e) {
     }
 };
 
-Tabs.prototype._init = function() {
+Tabs.prototype._init = function(initialTabNum) {
     this._tabsArr = this._elem.querySelectorAll('.tab');
     this._tabBlockArr = this._elem.querySelectorAll('.tab_block');
-    var activeTab = this._findActiveTab() || this._tabsArr[0];
+    var activeTab = this._tabsArr[initialTabNum] ? this._tabsArr[initialTabNum] : this._tabsArr[0];
+    // var activeTab = this._findActiveTab() || this._tabsArr[0];
     // console.log(activeTab);
 
     this._removeActiveClassesFromAll();
@@ -42,7 +43,7 @@ Tabs.prototype._init = function() {
     }
 };
 
-Tabs.prototype._findActiveTab = function() {
+/*Tabs.prototype._findActiveTab = function() {
     for (var i = 0; i < this._tabsArr.length; i++) {
         if (this._tabsArr[i].classList.contains('active-tab')) {
             return this._tabsArr[i];
@@ -50,7 +51,7 @@ Tabs.prototype._findActiveTab = function() {
     }
 
     return false;
-};
+};*/
 
 Tabs.prototype._removeActiveClassesFromAll = function() {
     this._removeActiveClassFromTabs();

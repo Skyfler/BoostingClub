@@ -1,9 +1,12 @@
 @@include('./templates/top1.html')
 <title>Boosting Club</title>
 @@include('./templates/top2.html')
-<header class="home-active">
-    @@include('./templates/headerInnerHTML.html')
+<header>
+    <nav class="closed menu clr container" id="main_menu" data-active-item="home">
+        @@include('./templates/headerInnerHTML.html')
+    </nav>
 </header>
+@@include('./templates/top3.html')
 <div class="banner">
     <div class="container">
         <div class="text_block">
@@ -18,33 +21,33 @@
         <div class="boost_services_block_container clr">
             <div class="row clr">
                 <div class="block">
-                    <div class="block_content skew_after">
+                    <a href="boosting.html#first-tab" class="block_content skew_after">
                         <img src="img/services_img1.png" class="responsive_img">
                         <div class="text_block">
-                            <div class="title">RANKED WINS BOOST</div>
+                            <div class="title">RANKED DIVISION BOOST</div>
                             <div class="text">Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum,</div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="block">
-                    <div class="block_content skew_after">
+                    <a href="boosting.html#second-tab" class="block_content skew_after">
                         <img src="img/services_img2.png" class="responsive_img">
                         <div class="text_block">
                             <div class="title">RANKED WINS BOOST</div>
                             <div class="text">Aenean sollicitudin, lorem quis bibendum.</div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="row clr">
                 <div class="block">
-                    <div class="block_content skew_after">
+                    <a href="boosting.html#third-tab" class="block_content skew_after">
                         <img src="img/services_img3.png" class="responsive_img">
                         <div class="text_block">
-                            <div class="title">RANKED WINS BOOST</div>
+                            <div class="title">RANKED DUO QUEUE BOOST</div>
                             <div class="text">Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -87,4 +90,5 @@
         </div>
     </div>
 </section>
+@@include('./templates/section.payment_systems.html')
 @@include('./templates/bottom.html')

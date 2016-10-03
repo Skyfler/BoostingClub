@@ -10,19 +10,10 @@ function CustomInputRange(options) {
     this._rulerElem = this._elem.querySelector('.ruler');
     this._thumbElem = this._elem.querySelector('.thumb');
 
-    // console.log('Min value from options:');
-    // console.log(options.min);
-    // console.log('Is NaN = ' + isNaN(parseInt(options.min)));
     this._min = isNaN(parseInt(options.min)) ? 0 : parseInt(options.min);
-    // console.log('Max value from options:');
-    // console.log(options.max);
-    // console.log('Is NaN = ' + isNaN(parseInt(options.max)));
     this._max = isNaN(parseInt(options.max)) ? 10 : parseInt(options.max);
     this._percentPerValue = 100 / (this._max - this._min);
 
-    // console.log('Default value from options:');
-    // console.log(options.initialValue);
-    // console.log('Is NaN = ' + isNaN(parseInt(options.initialValue)));
     var initialValue = isNaN(parseInt(options.initialValue)) ? this._min : parseInt(options.initialValue);
     this.setValue(initialValue);
 
@@ -32,15 +23,20 @@ function CustomInputRange(options) {
 
     this._addListener(this._elem, 'dragstart', function(e) {e.preventDefault();});
     this._addListener(this._elem, 'mousedown', this._onMouseDown);
+    this._addListener(this._elem, 'touchstart', this._onMouseDown);
 }
 
 CustomInputRange.prototype = Object.create(Helper.prototype);
 CustomInputRange.prototype.constructor = CustomInputRange;
 
 CustomInputRange.prototype._onMouseDown = function(e) {
+    // console.log(e);
     if (e.target.closest('.thumb')) {
+        var clientX = e.clientX || e.touches[0].clientX;
+        var clientY = e.clientY || e.touches[0].clientY;
+
         e.preventDefault();
-        this._startDrag(e.clientX, e.clientY);
+        this._startDrag(clientX, clientY);
     }
 };
 
@@ -51,19 +47,26 @@ CustomInputRange.prototype._startDrag = function(startClientX, startClientY) {
 
     this._rullerCoords = this._rulerElem.getBoundingClientRect();
 
+    this._onDocumentMouseMove({clientX: startClientX});
     this._addListener(document, 'mousemove', this._onDocumentMouseMove);
+    this._addListener(document, 'touchmove', this._onDocumentMouseMove);
     this._addListener(document, 'mouseup', this._onDocumentMouseUp);
+    this._addListener(document, 'touchend', this._onDocumentMouseUp);
 };
 
 CustomInputRange.prototype._onDocumentMouseMove = function(e) {
-    this._moveTo(e.clientX);
+    // console.log(e);
+    var clientX = e.clientX || e.touches[0].clientX;
+    this._moveTo(clientX);
 };
 
-CustomInputRange.prototype._onDocumentMouseUp = function() {
+CustomInputRange.prototype._onDocumentMouseUp = function(e) {
+    // console.log(e);
     this._endDrag();
 };
 
 CustomInputRange.prototype._moveTo = function(clientX) {
+    if (!clientX) return;
     // вычесть координату родителя, т.к. position: relative
     var newLeft = clientX - this._shiftX - this._rullerCoords.left;
 
@@ -82,6 +85,7 @@ CustomInputRange.prototype._moveTo = function(clientX) {
     var newValue = this._positionToValue(newLeft);
     if (newValue !== this._value) {
         this._value = newValue;
+        this._elem.setAttribute('data-value', this._value);
         // console.log('Value slided to ' + this._value);
 
         this._sendCustomEvent(this._elem, 'custominputrangeslide', {
@@ -108,7 +112,9 @@ CustomInputRange.prototype._pixelsToPercents = function(left) {
 
 CustomInputRange.prototype._endDrag = function() {
     this._removeListener(document, 'mousemove', this._onDocumentMouseMove);
+    this._removeListener(document, 'touchmove', this._onDocumentMouseMove);
     this._removeListener(document, 'mouseup', this._onDocumentMouseUp);
+    this._removeListener(document, 'touchend', this._onDocumentMouseUp);
 
     this._thumbElem.style.left = this._pixelsToPercents(this._pixelLeft) + '%';
 
@@ -137,6 +143,7 @@ CustomInputRange.prototype.setValue = function(value) {
     }
 
     this._value = value;
+    this._elem.setAttribute('data-value', this._value);
     this._thumbElem.style.left = this._valueToPosition(value) + '%';
     this._pixelLeft = parseInt(getComputedStyle(this._thumbElem).left);
 

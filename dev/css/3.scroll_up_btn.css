@@ -1,0 +1,35 @@
+@keyframes show_by_fade_in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.scroll_up_btn {
+    position: fixed;
+    z-index: 1000;
+    cursor: pointer;
+    /*bottom: 5%;*/
+    bottom: 74px;
+    right: 21px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #141558;
+    color: #141558;
+    /*font-size: 2.2em;*/
+    font-size: 3.6em;
+    text-align: center;
+    opacity: 0.5;
+    animation: show_by_fade_in 0.5s ease-in-out forwards;
+    box-shadow: 0 4px 5px -1px rgba(0,0,0,0.5);
+}
+
+.scroll_up_btn i {
+    display: block;
+    padding: 4px 0;
+    width: 44px;
+    /*width: 30px;*/
+}
