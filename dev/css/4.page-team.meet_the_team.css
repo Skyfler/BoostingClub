@@ -12,10 +12,11 @@
     float: left;
     width: 100%;
     position: relative;
+    margin-bottom: 30px;
 }
 
-.meet_the_team .meet_the_team_block_container .block+.block {
-    margin-top: 30px;
+.meet_the_team .meet_the_team_block_container .block:last-child {
+    margin-bottom: 0;
 }
 
 .meet_the_team .meet_the_team_block_container .block_content {
@@ -161,21 +162,18 @@
 
 @media screen and (min-width: 800px) {
 
-    .meet_the_team .meet_the_team_block_container .block,
-    .meet_the_team .meet_the_team_block_container .block+.block {
+    .meet_the_team .meet_the_team_block_container .block {
         width: 50%;
-        margin-top: 0;
     }
-    .meet_the_team .meet_the_team_block_container .block+.block+.block {
+    .meet_the_team .meet_the_team_block_container .block:last-child {
         width: 100%;
-        margin-top: 30px;
     }
 
     .meet_the_team .meet_the_team_block_container .block .block_content {
         width: 90%;
         max-width: 380px;
     }
-    .meet_the_team .meet_the_team_block_container .block+.block+.block .block_content {
+    .meet_the_team .meet_the_team_block_container .block:last-child .block_content {
         width: 45%;
     }
 
@@ -188,15 +186,15 @@
 
 @media screen and (min-width: 992px) {
 
-    .meet_the_team .meet_the_team_block_container .block,
-    .meet_the_team .meet_the_team_block_container .block+.block,
-    .meet_the_team .meet_the_team_block_container .block+.block+.block {
+    .meet_the_team .meet_the_team_block_container .block {
         width: 33.333333%;
-        margin-top: 0;
     }
 
-    .meet_the_team .meet_the_team_block_container .block+.block+.block .block_content {
-        width: 90%;
+    .meet_the_team .meet_the_team_block_container .block:last-child {
+        width: 100%;
+    }
+    .meet_the_team .meet_the_team_block_container .block:last-child .block_content {
+        width: 30%;
     }
 
 }

@@ -41,10 +41,10 @@ ContactFormController.prototype._postForm = function() {
         this._createPostDataObj(valuesObj)
     );
 
-    _ajax.ajax("POST", "php/send.php", this._onReqEnd.bind(this), formData);
-
     this._waitingForResponse = true;
     this._elem.classList.add('waiting_for_response');
+
+    _ajax.ajax("POST", "php/sendFormViaMail.php", this._onReqEnd.bind(this), formData);
 };
 
 ContactFormController.prototype._createPostDataObj = function(valuesObj) {

@@ -16,7 +16,7 @@ function AjaxPaginator(options) {
 
     this._innerPage = new InnerPage(
         document.querySelector('.' + this._innerPageClass),
-        this._optionsCreator.getOptionsObj(location.hash)
+        this._optionsCreator.getOptionsObj(window.location.hash)
     );
 
     if (!history || !history.pushState) return;
@@ -74,14 +74,14 @@ AjaxPaginator.prototype._onPopState = function(e) {
 
         this._innerPage = new InnerPage(
             innerPageElem,
-            this._optionsCreator.getOptionsObj(location.hash)
+            this._optionsCreator.getOptionsObj(window.location.hash)
         );
 
         this._sendCustomEvent(document, 'pageChangedViaAJAX', {
             bubbles: true,
             detail: {
-                url: location.pathname,
-                hash: location.hash
+                url: window.location.pathname,
+                hash: window.location.hash
             }
         });
     }
@@ -165,11 +165,11 @@ AjaxPaginator.prototype._getFullLink = function(href) {
 };
 
 AjaxPaginator.prototype._testSameOrigin = function(fullLink) {
-    return location.hostname === fullLink.hostname;
+    return window.location.hostname === fullLink.hostname;
 };
 
 AjaxPaginator.prototype._testSamePath = function(fullLink) {
-    return location.pathname === fullLink.pathname;
+    return window.location.pathname === fullLink.pathname;
 };
 
 AjaxPaginator.prototype._preventTransferCheck = function(link) {

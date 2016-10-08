@@ -5,6 +5,7 @@ var TierImageController = require('./boostController-tierImage');
 var OptionsVisibilityController = require('./boostController-optionsVisibility');
 var ValueDisplay = require('./boostController-valueDisplay');
 var _bcHelper = require('./boostController-helper');
+var _ajax = require('./ajax');
 
 function DuoBoostController(options) {
     FormTemplate.call(this, options);
@@ -25,10 +26,14 @@ function DuoBoostController(options) {
 
     this._onCustomSelect = this._onCustomSelect.bind(this);
     this._onCustomInputRange = this._onCustomInputRange.bind(this);
+    this._onSubmit = this._onSubmit.bind(this);
+    this._onClick = this._onClick.bind(this);
 
     this._addListener(this._elem, 'customselect', this._onCustomSelect);
     this._addListener(this._elem, 'custominputrangeslide', this._onCustomInputRange);
     this._addListener(this._elem, 'custominputrangechange', this._onCustomInputRange);
+    this._addListener(this._elem, 'submit', this._onSubmit);
+    this._addListener(this._elem, 'click', this._onClick);
 
     this._serverSelect.setOption({value: _bcHelper.SERVERS.eu.name});
     this._numberInputRange.setValue(5);
@@ -75,6 +80,14 @@ DuoBoostController.prototype._destroyOptionsControllers = function() {
 
     if (this._currentDivisionOptionsController) {
         this._currentDivisionOptionsController.remove();
+    }
+};
+
+DuoBoostController.prototype._onClick = function(e) {
+    var target = e.target;
+
+    if (target.matches('.img_submit')) {
+        this._onSubmit();
     }
 };
 
@@ -311,6 +324,72 @@ DuoBoostController.prototype._createDescription = function() {
         '{{suffix}}',
         _bcHelper.GAMES_OR_WINS[this._numberSuffix].title
     );
+};
+
+DuoBoostController.prototype._onSubmit = function(e) {
+    if (e) {
+        e.preventDefault();
+    }
+
+    if (this._waitingForResponse) {
+        // console.log('Already sent form!');
+        return;
+    }
+
+    var reqBody = this._getReqBody();
+
+    if (!reqBody) return;
+
+    this._waitingForResponse = true;
+    this._elem.classList.add('waiting_for_response');
+
+    var formData = this._createFormData(reqBody);
+
+    _ajax.ajax("POST", "php/paypal_createPayment.php", this._onReqEnd.bind(this), formData);
+};
+
+DuoBoostController.prototype._getReqBody = function() {
+    var valuesObj = this._getUserInputValues();
+
+    if (!valuesObj || valuesObj.__validationFailed) return false;
+
+    return {
+        serviceType: 'duoqBoost',
+        currentLeague: this._currentLeague,
+        currentDivision: this._currentDivision,
+        gamesOrWins: this._numberSuffix,
+        desiredNumber: this._desiredNumber,
+        server: this._server,
+        summonerName: valuesObj['Summoner Name'],
+        name: valuesObj.Name,
+        email: valuesObj.Email
+    };
+};
+
+DuoBoostController.prototype._onReqEnd = function(xhr) {
+    if (!this._elem) return;
+
+    this._waitingForResponse = false;
+    this._elem.classList.remove('waiting_for_response');
+
+    var res;
+
+    try {
+        res = JSON.parse(xhr.responseText);
+    } catch(e) {
+        res = false;
+    }
+
+    if (xhr.status === 200 && res.success) {
+        // this._elem.innerHTML = this._succsessNotificationHTML;
+        // console.log(res);
+        // console.log(res.approval_link);
+
+        window.location = res.approval_link;
+    } else {
+        this._showErrorNotification();
+        // console.log(res);
+    }
 };
 
 module.exports = DuoBoostController;

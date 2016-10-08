@@ -49,6 +49,7 @@
     color: #141558;
     margin-top: 20px;
     transition: color ease 0.5s;
+    text-transform: uppercase;
 }
 .boost_services .boost_services_block_container .block:hover .title {
     color: #72b22b;

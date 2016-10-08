@@ -5,6 +5,7 @@ var TierImageController = require('./boostController-tierImage');
 var OptionsVisibilityController = require('./boostController-optionsVisibility');
 var ValueDisplay = require('./boostController-valueDisplay');
 var _bcHelper = require('./boostController-helper');
+var _ajax = require('./ajax');
 
 function WinsBoostController(options) {
     FormTemplate.call(this, options);
@@ -24,10 +25,14 @@ function WinsBoostController(options) {
 
     this._onCustomSelect = this._onCustomSelect.bind(this);
     this._onCustomInputRange = this._onCustomInputRange.bind(this);
+    this._onSubmit = this._onSubmit.bind(this);
+    this._onClick = this._onClick.bind(this);
 
     this._addListener(this._elem, 'customselect', this._onCustomSelect);
     this._addListener(this._elem, 'custominputrangeslide', this._onCustomInputRange);
     this._addListener(this._elem, 'custominputrangechange', this._onCustomInputRange);
+    this._addListener(this._elem, 'submit', this._onSubmit);
+    this._addListener(this._elem, 'click', this._onClick);
 
     this._currentLeagueSelect.setOption({value: _bcHelper.LEAGUES.br.name});
     this._currentDivisionSelect.setOption({value: _bcHelper.DIVISIONS.d5.name});
@@ -72,6 +77,14 @@ WinsBoostController.prototype._destroyOptionsControllers = function() {
 
     if (this._currentDivisionOptionsController) {
         this._currentDivisionOptionsController.remove();
+    }
+};
+
+WinsBoostController.prototype._onClick = function(e) {
+    var target = e.target;
+
+    if (target.matches('.img_submit')) {
+        this._onSubmit();
     }
 };
 
@@ -281,6 +294,69 @@ WinsBoostController.prototype._createDescription = function() {
         '{{suffix}}',
         _bcHelper.GAMES_OR_WINS.wns.title
     );
+};
+
+WinsBoostController.prototype._onSubmit = function(e) {
+    if (e) {
+        e.preventDefault();
+    }
+
+    if (this._waitingForResponse) {
+        // console.log('Already sent form!');
+        return;
+    }
+
+    var reqBody = this._getReqBody();
+
+    if (!reqBody) return;
+
+    this._waitingForResponse = true;
+    this._elem.classList.add('waiting_for_response');
+
+    var formData = this._createFormData(reqBody);
+
+    _ajax.ajax("POST", "php/paypal_createPayment.php", this._onReqEnd.bind(this), formData);
+};
+
+WinsBoostController.prototype._getReqBody = function() {
+    var valuesObj = this._getUserInputValues();
+
+    if (!valuesObj || valuesObj.__validationFailed) return false;
+
+    return {
+        serviceType: 'winsBoost',
+        currentLeague: this._currentLeague,
+        currentDivision: this._currentDivision,
+        desiredNumber: this._desiredWins,
+        name: valuesObj.Name,
+        email: valuesObj.Email
+    };
+};
+
+WinsBoostController.prototype._onReqEnd = function(xhr) {
+    if (!this._elem) return;
+
+    this._waitingForResponse = false;
+    this._elem.classList.remove('waiting_for_response');
+
+    var res;
+
+    try {
+        res = JSON.parse(xhr.responseText);
+    } catch(e) {
+        res = false;
+    }
+
+    if (xhr.status === 200 && res.success) {
+        // this._elem.innerHTML = this._succsessNotificationHTML;
+        // console.log(res);
+        // console.log(res.approval_link);
+
+        window.location = res.approval_link;
+    } else {
+        this._showErrorNotification();
+        // console.log(res);
+    }
 };
 
 module.exports = WinsBoostController;
