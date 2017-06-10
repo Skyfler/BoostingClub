@@ -2,13 +2,13 @@
 
 function Helper() {
     this._listenerArr = [];
-    this._errorNotificationHTML = '<div class="error_notification">' +
+    /*this._errorNotificationHTML = '<div class="error_notification">' +
         '<p>An Error Occurred!</p>' +
         '<p>Please Try Again Later.</p>' +
         '<button>ОК</button>' +
-        '</div>';
+        '</div>';*/
 
-    this._closeErrorNotification = this._closeErrorNotification.bind(this);
+    /*this._closeErrorNotification = this._closeErrorNotification.bind(this);*/
 }
 
 Helper.prototype._addListener = function(element, event, handler, phase) {
@@ -81,16 +81,22 @@ Helper.prototype.remove = function() {
 };
 
 Helper.prototype._showErrorNotification = function() {
-    this._cover = document.createElement('div');
+    /*this._cover = document.createElement('div');
     this._cover.style.cssText = 'z-index: 1000; position: fixed; height: 100%; width: 100%; top: 0; left: 0; background: rgba(255, 255, 255, 0.25)';
     this._cover.innerHTML = this._errorNotificationHTML;
 
     document.body.insertAdjacentElement('afterBegin', this._cover);
     document.body.style.overflow = 'hidden';
-    this._addListener(document.body, 'click', this._closeErrorNotification);
+    this._addListener(document.body, 'click', this._closeErrorNotification);*/
+
+    new ModalWindow({
+        modalClass: 'error_notification',
+        modalInnerHTML: '<p>An Error Occurred!</p>' +
+        '<p>Please Try Again Later.</p>'
+    });
 };
 
-Helper.prototype._closeErrorNotification = function(e) {
+/*Helper.prototype._closeErrorNotification = function(e) {
     var target = e.target;
     if (target.tagName !== 'BUTTON') return;
 
@@ -98,7 +104,7 @@ Helper.prototype._closeErrorNotification = function(e) {
     delete this._cover;
     document.body.style.overflow = '';
     this._removeListener(document.body, 'click', this._closeErrorNotification);
-};
+};*/
 
 Helper.prototype._sendCustomEvent = function(elem, eventName, options) {
     var widgetEvent = new CustomEvent(eventName, options);
@@ -122,3 +128,5 @@ Helper.prototype._loadImages = function(imgSrcArr) {
 };
 
 module.exports = Helper;
+
+var ModalWindow = require('./modalWindow');

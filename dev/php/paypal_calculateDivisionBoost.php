@@ -92,7 +92,7 @@ function createDescription() {
 		return '';
 	};
 
-	$string = 'Division Boost: {{currentLeagueName}} ({{currentDivisionName}}) -> {{desiredLeagueName}} ({{desiredDivisionName}})';
+	$string = 'Division Boost: {{currentLeagueName}} ({{currentDivisionName}}) -> {{desiredLeagueName}} ({{desiredDivisionName}}).';
 
 	$patterns = array();
 	$patterns[0] = '/{{currentLeagueName}}/';

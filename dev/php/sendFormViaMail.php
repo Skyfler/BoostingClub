@@ -1,6 +1,6 @@
 <?php
 
-require($_SERVER['DOCUMENT_ROOT'].'/php/paypal_variables.php');
+require($_SERVER['DOCUMENT_ROOT'].'/php/variables.php');
 require($_SERVER['DOCUMENT_ROOT'].'/php/lib/PHPMailer/PHPMailerAutoload.php');
 
 $mailer = new PHPMailer;

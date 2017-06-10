@@ -4,6 +4,7 @@ var FormTemplate = require('./formTemplate');
 var TierImageController = require('./boostController-tierImage');
 var OptionsVisibilityController = require('./boostController-optionsVisibility');
 var ValueDisplay = require('./boostController-valueDisplay');
+var ModalWindow = require('./modalWindow');
 var _bcHelper = require('./boostController-helper');
 var _ajax = require('./ajax');
 
@@ -310,12 +311,34 @@ WinsBoostController.prototype._onSubmit = function(e) {
 
     if (!reqBody) return;
 
-    this._waitingForResponse = true;
-    this._elem.classList.add('waiting_for_response');
+//    this._waitingForResponse = true;
+//    this._elem.classList.add('waiting_for_response');
 
     var formData = this._createFormData(reqBody);
 
     _ajax.ajax("POST", "php/paypal_createPayment.php", this._onReqEnd.bind(this), formData);
+
+    var str = '<div class="instruction_container">' +
+        '<div>You\'ve sent a request for <b>' + this._createDescription() + '</b>, for accepting follow the instructions below:</div>' +
+        '<ul class="instruction_list">' +
+        '<li><span>Authorize to your PayPal account.</span></li>' +
+        '<li><span>Choose <b>Send payments for goods or services</b>.</span></li>' +
+        '<li><span>Type or Copy our Mail address <b>violetta007@yandex.ru</b> and press <b>NEXT</b>.</span></li>' +
+        '<li><span>The service is cost by <b>' + Math.floor(this._getTotalPrice()) + ' &euro;</b>, Type or Copy this amount in the box <b>"Recipient receives"</b> and chose the <b>currency&nbsp;- EUR</b>*</span></li>' +
+        '<li><span>Press <b>Continue</b> and <b>Confirm</b> the payment</span>.</li>' +
+        '<li><span>Done, we will back to you shortly on e-mail to find out the details**</span>.</li>' +
+        '</ul>' +
+        '<div>*You can add Notes if you want, but its not nessesary unless the e-mail on the paypal is the same as in order on our website.</div>' +
+        '<div>**If you have  some issues or questions, do not hesitate to write us on our <b>Online Chat</b>.</div>' +
+        '<div>';
+
+    var instruction = new ModalWindow({
+        modalClass: 'insructions_notification',
+        modalInnerHTML: str,
+        buttons: {
+            close: '<span></span><span></span>'
+        }
+    });
 };
 
 WinsBoostController.prototype._getReqBody = function() {
@@ -352,7 +375,7 @@ WinsBoostController.prototype._onReqEnd = function(xhr) {
         // console.log(res);
         // console.log(res.approval_link);
 
-        window.location = res.approval_link;
+        /*window.location = res.approval_link;*/
     } else {
         this._showErrorNotification();
         // console.log(res);

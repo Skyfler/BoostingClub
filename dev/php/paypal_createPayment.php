@@ -7,7 +7,7 @@
 require($_SERVER['DOCUMENT_ROOT'].'/php/lib/PHPExcel-1.8/Classes/PHPExcel.php');
 require($_SERVER['DOCUMENT_ROOT'].'/php/lib/PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
 
-require($_SERVER['DOCUMENT_ROOT'].'/php/paypal_variables.php');
+require($_SERVER['DOCUMENT_ROOT'].'/php/variables.php');
 
 if ($_POST['serviceType'] === 'divisionBoost') {
     require($_SERVER['DOCUMENT_ROOT'].'/php/paypal_calculateDivisionBoost.php');
@@ -24,7 +24,7 @@ if ($_POST['serviceType'] === 'divisionBoost') {
 }
 
 $price = floor(getTotalPrice());
-$description = createDescription();
+$description = createDescription(); //. " Total price: " . $price . "€";
 
 if ($price === 0) {
     $res['msg'] = "Invalid values for calculating a price.";
@@ -32,7 +32,7 @@ if ($price === 0) {
 }
 
 try {
-    $conn = new PDO("mysql:host=" . $db_serverName . ";dbname=" . $db_Name, $db_userName, $db_password);
+    /*$conn = new PDO("mysql:host=" . $db_serverName . ";dbname=" . $db_Name, $db_userName, $db_password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //    echo "Connected successfully";
@@ -40,7 +40,7 @@ try {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.sandbox.paypal.com/v1/oauth2/token",
+        CURLOPT_URL => "https://api" . $paypal_mode_aval_arr[$paypal_mode] . ".paypal.com/v1/oauth2/token",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -51,7 +51,7 @@ try {
         CURLOPT_HTTPHEADER => array(
             "accept: application/json",
             "accept-language: en_US",
-            "authorization: Basic " . base64_encode($paypal_ClientID . ":" . $paypal_Secret),
+            "authorization: Basic " . base64_encode(${"paypal_" . $paypal_mode . "ClientID"} . ":" . ${"paypal_" . $paypal_mode . "Secret"}),
             "content-type: application/x-www-form-urlencoded"
         ),
     ));
@@ -62,7 +62,7 @@ try {
     $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
     if ($http_code !== 200) {
-        $res['msg'] = "Create-Token request failed. Response Code: " . $http_code;
+        $res['msg'] = "Get-Token request failed. Response Code: " . $http_code . "Response text: " . $response;
         goto onFail;
     }
 
@@ -83,7 +83,7 @@ try {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.sandbox.paypal.com/v1/payments/payment",
+        CURLOPT_URL => "https://api" . $paypal_mode_aval_arr[$paypal_mode]. ".paypal.com/v1/payments/payment",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -109,7 +109,17 @@ try {
                         \"total\": \"" . $price . "\",
                         \"currency\": \"EUR\"
                     },
-                    \"description\": \"" . $description . "\"
+                    \"description\": \"" . $description . "\",
+                    \"item_list\": {
+                        \"items\":[
+                            {
+                                \"quantity\":\"1\",
+                                \"name\":\"" . $description . "\",
+                                \"price\":\"" . $price . "\",
+                                \"currency\":\"EUR\"
+                            }
+                        ]
+                    }
                 }
             ]
     }",
@@ -149,51 +159,63 @@ try {
         $execute_link . "', '" . $_POST['name'] . "', '" . $_POST['email'] . "', '" . $_POST['summonerName'] . "', '" . $_POST['server'] . "', '" . $description . "', '" . $price . "')";
 //     use exec() because no results are returned
 
-    $conn->exec($sql);
+    $conn->exec($sql);*/
 
-	// Create new PHPExcel object
-	/* echo date('H:i:s') . " Create new PHPExcel object\n"; */
-	$objPHPExcel = new PHPExcel();
-	try {
-		/* echo date('H:i:s') . " Try reading file<br>"; */
-		$objPHPExcel = PHPExcel_IOFactory::load($_SERVER['DOCUMENT_ROOT']."/".$ordersFileName);
-		$objPHPExcel->setActiveSheetIndex(0);
-		$row = $objPHPExcel->getActiveSheet()->getHighestRow()+1;
-	}
-	catch(Exception $e)
-	{
-		/* echo date('H:i:s') . " Reading failed<br>"; */
-		$objPHPExcel->setActiveSheetIndex(0);
-		$row = 1;
-		/* echo date('H:i:s') . " Row set to " . $row . "<br>"; */
-		/* echo date('H:i:s') . " Adding titles<br>"; */
-		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$row, 'Name');
-		$objPHPExcel->getActiveSheet()->SetCellValue('B'.$row, 'Email');
-		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, 'Summoner Name');
-		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$row, 'Description');
-		$objPHPExcel->getActiveSheet()->SetCellValue('E'.$row, 'Server');
-		$objPHPExcel->getActiveSheet()->SetCellValue('F'.$row, 'Total Price (€)');
-		/* echo date('H:i:s') . " Setting 1st row to BOLD<br>"; */
-		$objPHPExcel->getActiveSheet()->getStyle("A1:F1")->getFont()->setBold(true);
-		$row = 2;
-	}
-	/* echo date('H:i:s') . " Row set to " . $row . "<br>"; */
-	/* echo date('H:i:s') . " Adding data<br>"; */
-	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$row, $_POST['name']);
-	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$row, $_POST['email']);
-	$objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, $_POST['summonerName']);
-	$objPHPExcel->getActiveSheet()->SetCellValue('D'.$row, $description);
-	$objPHPExcel->getActiveSheet()->SetCellValue('E'.$row, $_POST['server']);
-	$objPHPExcel->getActiveSheet()->SetCellValue('F'.$row, $price);
-	// Save Excel 2007 file
-	/* echo date('H:i:s') . " Write to Excel2007 format<br>"; */
-	$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-	$objWriter->save($_SERVER['DOCUMENT_ROOT']."/".$ordersFileName);
-	/* echo date('H:i:s') . " Done writing file.<br>"; */
+    // Create new PHPExcel object
+    /* echo date('H:i:s') . " Create new PHPExcel object\n"; */
+    $objPHPExcel = new PHPExcel();
+    try {
+        /* echo date('H:i:s') . " Try reading file<br>"; */
+        $objPHPExcel = PHPExcel_IOFactory::load($_SERVER['DOCUMENT_ROOT']."/".$ordersFileName);
+        $objPHPExcel->setActiveSheetIndex(0);
+        $row = $objPHPExcel->getActiveSheet()->getHighestRow()+1;
+    }
+    catch(Exception $e)
+    {
+        /* echo date('H:i:s') . " Reading failed<br>"; */
+        $objPHPExcel->setActiveSheetIndex(0);
+        $row = 1;
+        /* echo date('H:i:s') . " Row set to " . $row . "<br>"; */
+        /* echo date('H:i:s') . " Adding titles<br>"; */
+        $objPHPExcel->getActiveSheet()->SetCellValue('A'.$row, 'Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B'.$row, 'Email');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, 'Summoner Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D'.$row, 'Description');
+        $objPHPExcel->getActiveSheet()->SetCellValue('E'.$row, 'Server');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F'.$row, 'Total Price (€)');
+        /* echo date('H:i:s') . " Setting 1st row to BOLD<br>"; */
+        $objPHPExcel->getActiveSheet()->getStyle("A1:F1")->getFont()->setBold(true);
+        $row = 2;
+    }
+    /* echo date('H:i:s') . " Row set to " . $row . "<br>"; */
+    /* echo date('H:i:s') . " Adding data<br>"; */
+    $objPHPExcel->getActiveSheet()->SetCellValue('A'.$row, $_POST['name']);
+    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$row, $_POST['email']);
+    $objPHPExcel->getActiveSheet()->SetCellValue('C'.$row, $_POST['summonerName']);
+    $objPHPExcel->getActiveSheet()->SetCellValue('D'.$row, $description);
+    $objPHPExcel->getActiveSheet()->SetCellValue('E'.$row, $_POST['server']);
+    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$row, $price);
+    // Save Excel 2007 file
+    /* echo date('H:i:s') . " Write to Excel2007 format<br>"; */
+    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+    $objWriter->save($_SERVER['DOCUMENT_ROOT']."/".$ordersFileName);
+    /* echo date('H:i:s') . " Done writing file.<br>"; */
 
     $res['success'] = 1;
-    $res['msg'] = "Payment Created!";
-    $res['approval_link'] = $approval_link;
+    /*$res['msg'] = "Payment Created!";*/
+    /*$res['approval_link'] = $approval_link;*/
+
+    /*=================================*/
+    $row = array(
+        'name' => $_POST['name'],
+        'email' => $_POST['email'],
+        'summoner_name' => $_POST['summonerName'],
+        'description' => $description,
+        'price' => $price,
+        'server' => $_POST['server'],
+    );
+    require($_SERVER['DOCUMENT_ROOT'].'/php/sendNotification.php');
+    /*=================================*/
 }
 catch(PDOException $e)
 {

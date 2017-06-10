@@ -54,7 +54,7 @@ function createDescription() {
         $currentDivision = $valArr['DIVISIONS']['d1']['name'];
     }
 
-    $string = 'Wins Boost: {{currentLeagueName}} ({{currentDivisionName}}) - {{number}} {{suffix}}';
+    $string = 'Wins Boost: {{currentLeagueName}} ({{currentDivisionName}}) - {{number}} {{suffix}}.';
 
     $patterns = array();
     $patterns[0] = '/{{currentLeagueName}}/';

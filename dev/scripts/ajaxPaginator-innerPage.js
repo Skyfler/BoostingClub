@@ -58,6 +58,13 @@ function InnerPage(innerPageElem, options) {
         });
     }
 
+    var error404Elem = this._innerPageElem.querySelector('#error404');
+    if (error404Elem) {
+        setTimeout(function(){
+            error404Elem.scrollIntoView(true);
+        }, 500);
+    }
+
     if (options.callback) {
         options.callback();
     }

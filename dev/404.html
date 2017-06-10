@@ -7,12 +7,17 @@
     </nav>
 </header>
 @@include('./templates/top3.html')
-<section class="error404">
+<section class="error404" id="error404">
     <div class="container">
-        <h2 class="block_main_title remove_padding">Page Not Found</h2>
-        <p class="title"><i class="fa fa-cog"></i> 404</p>
-        <p>Page you requested can not be found or is currently unavailable.</p>
-        <p>Please click <a href="/">here</a> to go back to the main page.</p>
+        <h2 class="title"><img src="img/img_404_title.png" class="responsive_img"></h2>
+        <p class="description">Oops! We can’t find such page <span>:(</span></p>
+        <div>
+            <p>Let’s get you out of here!</p>
+            <a href="/" class="back_btn skew"><span class="unskew">Home Page</span></a>
+        </div>
+        <a href="/" class="brand_logo">
+            <img class="responsive_img logo_l" src="img/logo_l.png" alt="Boosting Club logo">
+        </a>
     </div>
 </section>
 @@include('./templates/bottom.html')

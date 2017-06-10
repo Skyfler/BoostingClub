@@ -59,7 +59,7 @@ function createDescription() {
         $currentDivision = $valArr['DIVISIONS']['d1']['name'];
     }
 
-    $string = 'Duoq Boost: {{currentLeagueName}} ({{currentDivisionName}}) - {{number}} {{suffix}}';
+    $string = 'Duoq Boost: {{currentLeagueName}} ({{currentDivisionName}}) - {{number}} {{suffix}}.';
 
     $patterns = array();
     $patterns[0] = '/{{currentLeagueName}}/';

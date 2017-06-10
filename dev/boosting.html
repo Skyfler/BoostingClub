@@ -2,229 +2,232 @@
 <title>League Boosting</title>
 @@include('./templates/top2.html')
 <header>
-    <nav class="closed menu clr container" id="main_menu" data-active-item="boosting">
-        @@include('./templates/headerInnerHTML.html')
-    </nav>
+	<nav class="closed menu clr container" id="main_menu" data-active-item="boosting">
+		@@include('./templates/headerInnerHTML.html')
+	</nav>
 </header>
 @@include('./templates/top3.html')
 <section class="league_boosting">
-    <div class="container">
-        <h2 class="block_main_title remove_padding">BOOST PURCHASE</h2>
-        <div class="tabs_container">
-            <div class="row remove_padding">
-                <ul class="tabs clr skew">
-                    <li class="tab active-tab"><a href="#division"><span class="unskew">Division Boost</span></a></li>
-                    <li class="tab"><a href="#wins"><span class="unskew">Wins Boost</span></a></li>
-                    <li class="tab"><a href="#duo"><span class="unskew">Duo Queue</span></a></li>
-                </ul>
-            </div>
-            <div class="tab_blocks_container" id="league_boost">
-                <div class="tab_block active-tab-block fade clr" id="division">
-                    <div class="current_rank clr quarter_width">
-                        <div class="input_group block_title">Current Rank</div>
-                        <div class="input_group img_container">
-                            <img id="division-current-tier" src="img/tiers/bronze_5.png" class="responsive_img">
-                        </div>
-                        <div class="input_group">
-                            <div id="division-current-league-select" class="customselect required" name="Current League" data-component="form-input">
-                                <button class="title">Select League</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="dd">Dimond</li>
-                                    <li class="option" data-value="pl">Platinum</li>
-                                    <li class="option" data-value="gl">Gold</li>
-                                    <li class="option" data-value="sv">Silver</li>
-                                    <li class="option" data-value="br">Bronze</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="input_group">
-                            <div id="division-current-division-select" class="customselect required" name="Current Division" data-component="form-input">
-                                <button class="title">Select Division</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="d1">Division I</li>
-                                    <li class="option" data-value="d2">Division II</li>
-                                    <li class="option" data-value="d3">Division III</li>
-                                    <li class="option" data-value="d4">Division IV</li>
-                                    <li class="option" data-value="d5">Division V</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="input_group">
-                            <div id="division-current-lp-select" class="customselect required" name="Current LP" data-component="form-input">
-                                <button class="title">Select LP</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="lp80">80-100 LP</li>
-                                    <li class="option" data-value="lp60">60-80 LP</li>
-                                    <li class="option" data-value="lp40">40-60 LP</li>
-                                    <li class="option" data-value="lp20">20-40 LP</li>
-                                    <li class="option" data-value="lp0">0-20 LP</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="desired_rank clr quarter_width">
-                        <div class="input_group block_title">Desired Rank</div>
-                        <div class="input_group img_container">
-                            <img id="division-desired-tier" src="img/tiers/bronze_5.png" class="responsive_img">
-                        </div>
-                        <div class="input_group">
-                            <div id="division-desired-league-select" class="customselect required" name="Desired League" data-component="form-input">
-                                <button class="title">Select League</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="ms">Master</li>
-                                    <li class="option" data-value="dd">Dimond</li>
-                                    <li class="option" data-value="pl">Platinum</li>
-                                    <li class="option" data-value="gl">Gold</li>
-                                    <li class="option" data-value="sv">Silver</li>
-                                    <li class="option" data-value="br">Bronze</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="input_group">
-                            <div id="division-desired-division-select" class="customselect required" name="Desired Division" data-component="form-input">
-                                <button class="title">Select Division</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="d1">Division I</li>
-                                    <li class="option" data-value="d2">Division II</li>
-                                    <li class="option" data-value="d3">Division III</li>
-                                    <li class="option" data-value="d4">Division IV</li>
-                                    <li class="option" data-value="d5">Division V</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    @@include('./templates/league_boosting.form_container.html')
-                </div>
-                <div class="tab_block clr" id="wins">
-                    <div class="current_rank clr quarter_width">
-                        <div class="input_group block_title">Current Rank</div>
-                        <div class="input_group img_container">
-                            <img id="wins-current-tier" src="img/tiers/bronze_5.png" class="responsive_img">
-                        </div>
-                        <div class="input_group">
-                            <div id="wins-current-league-select" class="customselect required" name="Current League" data-component="form-input">
-                                <button class="title">Select League</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <!--<li class="option" data-value="chg">Challenger</li>-->
-                                    <!--<li class="option" data-value="ms">Master</li>-->
-                                    <li class="option" data-value="dd">Dimond</li>
-                                    <li class="option" data-value="pl">Platinum</li>
-                                    <li class="option" data-value="gl">Gold</li>
-                                    <li class="option" data-value="sv">Silver</li>
-                                    <li class="option" data-value="br">Bronze</li>
-                                    <li class="option" data-value="unr">Unranked</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="input_group">
-                            <div id="wins-current-division-select" class="customselect required" name="Current Division" data-component="form-input">
-                                <button class="title">Select Division</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="d1">Division I</li>
-                                    <li class="option" data-value="d2">Division II</li>
-                                    <li class="option" data-value="d3">Division III</li>
-                                    <li class="option" data-value="d4">Division IV</li>
-                                    <li class="option" data-value="d5">Division V</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="number_of_wins quarter_width">
-                        <div class="input_group block_title">nUMBER OF WINS</div>
-                        <div id="wins-display" class="input_group number_container">10</div>
-                        <div class="input_group">
-                            <div id="wins-number-range" name="Number of Wins" class="custom_input_range required" data-min-value="1" data-max-value="20" data-default-value="10" data-component="form-input">
-                                <div class="ruler">
-                                    <div class="thumb skew_after"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @@include('./templates/league_boosting.form_container.html')
-                </div>
-                <div class="tab_block clr" id="duo">
-                    <div class="summoner clr quarter_width">
-                        <div class="input_group block_title">summoner</div>
-                        <div class="input_group">
-                            <input type="text" class="required" placeholder="Name" name="Summoner Name" data-component="form-input">
-                        </div>
-                        <div class="input_group">
-                            <div id="duo-server-select" class="customselect required" name="Server" data-component="form-input">
-                                <button class="title">Select Server</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="eu">Europe West</li>
-                                    <li class="option" data-value="ene">Europe Nordic &amp; East</li>
-                                    <li class="option" data-value="na">North America</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div id="duo-display" class="input_group number_container">5 Games</div>
-                        <div class="input_group">
-                            <div id="duo-number-range" name="Number of Games|Wins" class="custom_input_range required" data-min-value="1" data-max-value="15" data-default-value="5" data-component="form-input">
-                                <div class="ruler">
-                                    <div class="thumb skew_after"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input_group">
-                            <div id="duo-games-wins-select" class="customselect required" name="Games or Wins" data-component="form-input">
-                                <button class="title">Games or Wins</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="gms">Games</li>
-                                    <li class="option" data-value="wns">Wins</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="current_rank clr quarter_width">
-                        <div class="input_group block_title">Current Rank</div>
-                        <div class="input_group img_container">
-                            <img id="duo-current-tier" src="img/tiers/bronze_5.png" class="responsive_img">
-                        </div>
-                        <div class="input_group">
-                            <div id="duo-current-league-select" class="customselect required" name="Current League" data-component="form-input">
-                                <button class="title">Select League</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <!--<li class="option" data-value="chg">Challenger</li>-->
-                                    <!--<li class="option" data-value="ms">Master</li>-->
-                                    <li class="option" data-value="dd">Dimond</li>
-                                    <li class="option" data-value="pl">Platinum</li>
-                                    <li class="option" data-value="gl">Gold</li>
-                                    <li class="option" data-value="sv">Silver</li>
-                                    <li class="option" data-value="br">Bronze</li>
-                                    <li class="option" data-value="unr">Unranked</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="input_group">
-                            <div id="duo-current-division-select" class="customselect required" name="Current Division" data-component="form-input">
-                                <button class="title">Select Division</button>
-                                <ul class="option_list">
-                                    <!-- значение хранится в свойстве data-value -->
-                                    <li class="option" data-value="d1">Division I</li>
-                                    <li class="option" data-value="d2">Division II</li>
-                                    <li class="option" data-value="d3">Division III</li>
-                                    <li class="option" data-value="d4">Division IV</li>
-                                    <li class="option" data-value="d5">Division V</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    @@include('./templates/league_boosting.form_container.html')
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<h2 class="block_main_title remove_padding">BOOST PURCHASE</h2>
+		<div class="tabs_container">
+			<div class="row remove_padding">
+				<ul class="tabs clr skew">
+					<li class="tab active-tab"><a href="#division"><span class="unskew">Division Boost</span></a></li>
+					<li class="tab"><a href="#wins"><span class="unskew">Wins Boost</span></a></li>
+					<li class="tab"><a href="#duo"><span class="unskew">Duo Queue</span></a></li>
+				</ul>
+			</div>
+			<div class="tab_blocks_container" id="league_boost">
+				<div class="tab_block active-tab-block fade clr" id="division">
+					<div class="waiting_block"></div>
+					<div class="current_rank clr quarter_width">
+						<div class="input_group block_title">Current Rank</div>
+						<div class="input_group img_container">
+							<img id="division-current-tier" src="img/tiers/bronze_5.png" class="responsive_img">
+						</div>
+						<div class="input_group">
+							<div id="division-current-league-select" class="customselect required" name="Current League" data-component="form-input">
+								<button class="title">Select League</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="dd">Dimond</li>
+									<li class="option" data-value="pl">Platinum</li>
+									<li class="option" data-value="gl">Gold</li>
+									<li class="option" data-value="sv">Silver</li>
+									<li class="option" data-value="br">Bronze</li>
+								</ul>
+							</div>
+						</div>
+						<div class="input_group">
+							<div id="division-current-division-select" class="customselect required" name="Current Division" data-component="form-input">
+								<button class="title">Select Division</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="d1">Division I</li>
+									<li class="option" data-value="d2">Division II</li>
+									<li class="option" data-value="d3">Division III</li>
+									<li class="option" data-value="d4">Division IV</li>
+									<li class="option" data-value="d5">Division V</li>
+								</ul>
+							</div>
+						</div>
+						<div class="input_group">
+							<div id="division-current-lp-select" class="customselect required" name="Current LP" data-component="form-input">
+								<button class="title">Select LP</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="lp80">80-100 LP</li>
+									<li class="option" data-value="lp60">60-80 LP</li>
+									<li class="option" data-value="lp40">40-60 LP</li>
+									<li class="option" data-value="lp20">20-40 LP</li>
+									<li class="option" data-value="lp0">0-20 LP</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="desired_rank clr quarter_width">
+						<div class="input_group block_title">Desired Rank</div>
+						<div class="input_group img_container">
+							<img id="division-desired-tier" src="img/tiers/bronze_5.png" class="responsive_img">
+						</div>
+						<div class="input_group">
+							<div id="division-desired-league-select" class="customselect required" name="Desired League" data-component="form-input">
+								<button class="title">Select League</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="ms">Master</li>
+									<li class="option" data-value="dd">Dimond</li>
+									<li class="option" data-value="pl">Platinum</li>
+									<li class="option" data-value="gl">Gold</li>
+									<li class="option" data-value="sv">Silver</li>
+									<li class="option" data-value="br">Bronze</li>
+								</ul>
+							</div>
+						</div>
+						<div class="input_group">
+							<div id="division-desired-division-select" class="customselect required" name="Desired Division" data-component="form-input">
+								<button class="title">Select Division</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="d1">Division I</li>
+									<li class="option" data-value="d2">Division II</li>
+									<li class="option" data-value="d3">Division III</li>
+									<li class="option" data-value="d4">Division IV</li>
+									<li class="option" data-value="d5">Division V</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					@@include('./templates/league_boosting.form_container.html')
+				</div>
+				<div class="tab_block clr" id="wins">
+					<div class="waiting_block"></div>
+					<div class="current_rank clr quarter_width">
+						<div class="input_group block_title">Current Rank</div>
+						<div class="input_group img_container">
+							<img id="wins-current-tier" src="img/tiers/bronze_5.png" class="responsive_img">
+						</div>
+						<div class="input_group">
+							<div id="wins-current-league-select" class="customselect required" name="Current League" data-component="form-input">
+								<button class="title">Select League</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<!--<li class="option" data-value="chg">Challenger</li>-->
+									<!--<li class="option" data-value="ms">Master</li>-->
+									<li class="option" data-value="dd">Dimond</li>
+									<li class="option" data-value="pl">Platinum</li>
+									<li class="option" data-value="gl">Gold</li>
+									<li class="option" data-value="sv">Silver</li>
+									<li class="option" data-value="br">Bronze</li>
+									<li class="option" data-value="unr">Unranked</li>
+								</ul>
+							</div>
+						</div>
+						<div class="input_group">
+							<div id="wins-current-division-select" class="customselect required" name="Current Division" data-component="form-input">
+								<button class="title">Select Division</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="d1">Division I</li>
+									<li class="option" data-value="d2">Division II</li>
+									<li class="option" data-value="d3">Division III</li>
+									<li class="option" data-value="d4">Division IV</li>
+									<li class="option" data-value="d5">Division V</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="number_of_wins quarter_width">
+						<div class="input_group block_title">nUMBER OF WINS</div>
+						<div id="wins-display" class="input_group number_container">10</div>
+						<div class="input_group">
+							<div id="wins-number-range" name="Number of Wins" class="custom_input_range required" data-min-value="1" data-max-value="20" data-default-value="10" data-component="form-input">
+								<div class="ruler">
+									<div class="thumb skew_after"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					@@include('./templates/league_boosting.form_container.html')
+				</div>
+				<div class="tab_block clr" id="duo">
+					<div class="waiting_block"></div>
+					<div class="summoner clr quarter_width">
+						<div class="input_group block_title">summoner</div>
+						<div class="input_group">
+							<input type="text" class="required" placeholder="Name" name="Summoner Name" data-component="form-input">
+						</div>
+						<div class="input_group">
+							<div id="duo-server-select" class="customselect required" name="Server" data-component="form-input">
+								<button class="title">Select Server</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="eu">Europe West</li>
+									<li class="option" data-value="ene">Europe Nordic &amp; East</li>
+									<li class="option" data-value="na">North America</li>
+								</ul>
+							</div>
+						</div>
+						<div id="duo-display" class="input_group number_container">5 Games</div>
+						<div class="input_group">
+							<div id="duo-number-range" name="Number of Games|Wins" class="custom_input_range required" data-min-value="1" data-max-value="15" data-default-value="5" data-component="form-input">
+								<div class="ruler">
+									<div class="thumb skew_after"></div>
+								</div>
+							</div>
+						</div>
+						<div class="input_group">
+							<div id="duo-games-wins-select" class="customselect required" name="Games or Wins" data-component="form-input">
+								<button class="title">Games or Wins</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="gms">Games</li>
+									<li class="option" data-value="wns">Wins</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="current_rank clr quarter_width">
+						<div class="input_group block_title">Current Rank</div>
+						<div class="input_group img_container">
+							<img id="duo-current-tier" src="img/tiers/bronze_5.png" class="responsive_img">
+						</div>
+						<div class="input_group">
+							<div id="duo-current-league-select" class="customselect required" name="Current League" data-component="form-input">
+								<button class="title">Select League</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<!--<li class="option" data-value="chg">Challenger</li>-->
+									<!--<li class="option" data-value="ms">Master</li>-->
+									<li class="option" data-value="dd">Dimond</li>
+									<li class="option" data-value="pl">Platinum</li>
+									<li class="option" data-value="gl">Gold</li>
+									<li class="option" data-value="sv">Silver</li>
+									<li class="option" data-value="br">Bronze</li>
+									<li class="option" data-value="unr">Unranked</li>
+								</ul>
+							</div>
+						</div>
+						<div class="input_group">
+							<div id="duo-current-division-select" class="customselect required" name="Current Division" data-component="form-input">
+								<button class="title">Select Division</button>
+								<ul class="option_list">
+									<!-- значение хранится в свойстве data-value -->
+									<li class="option" data-value="d1">Division I</li>
+									<li class="option" data-value="d2">Division II</li>
+									<li class="option" data-value="d3">Division III</li>
+									<li class="option" data-value="d4">Division IV</li>
+									<li class="option" data-value="d5">Division V</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					@@include('./templates/league_boosting.form_container.html')
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 @@include('./templates/section.payment_systems.html')
 @@include('./templates/bottom.html')

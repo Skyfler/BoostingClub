@@ -42,6 +42,9 @@ module.exports = {
 
             // This is like a think function from a game loop
             var scroll_frame = function() {
+                
+//                console.log('previous_top');
+//                console.log(previous_top);
                 if(element.scrollTop != previous_top) {
                     reject("interrupted");
                     return;
@@ -51,7 +54,12 @@ module.exports = {
                 var now = Date.now();
                 var point = smooth_step(start_time, end_time, now);
                 var frameTop = Math.round(start_top + (distance * point));
+//                var frameTop = start_top + (distance * point);
+//                console.log('frameTop');
+//                console.log(frameTop);
                 element.scrollTop = frameTop;
+//                console.log('element.scrollTop');
+//                console.log(element.scrollTop);
 
                 // check if we're done!
                 if(now >= end_time) {
@@ -64,8 +72,9 @@ module.exports = {
                 // interrupted.
                 if(element.scrollTop === previous_top
                     && element.scrollTop !== frameTop) {
-                    resolve();
-                    return;
+//                    console.log('resolve');
+//                    resolve();
+//                    return;
                 }
                 previous_top = element.scrollTop;
 

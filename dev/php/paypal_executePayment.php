@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require($_SERVER['DOCUMENT_ROOT'].'/php/paypal_variables.php');
+require($_SERVER['DOCUMENT_ROOT'].'/php/variables.php');
 
 $redirectUrl = $successPageUrl;
 
@@ -56,7 +56,7 @@ try {
 
     if ($http_code !== 200) {
         $redirectUrl = $failPageUrl;
-//        echo 'http_code: ' . $http_code . '<br>';
+//        echo "Execute-Payment request failed.<br> Response Code: " . $http_code . "<br>Response text: <br>" . $response;
         goto onFail;
     }
 
