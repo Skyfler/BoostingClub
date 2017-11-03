@@ -1,64 +1,65 @@
 .frequently_asked_questions {
-    padding-bottom: 100px;
+	padding-bottom: 100px;
 }
 
 .frequently_asked_questions .block_main_title {
-    text-transform: none;
+	text-transform: none;
 }
 .frequently_asked_questions .text_block .title {
-    font-size: 2em;
-    font-weight: 300;
-    color: #7aa156;
-    padding: 0;
-    border-bottom: 3px solid #7aa156;
-    margin-bottom: 25px;
+	font-size: 2em;
+	font-weight: 300;
+	color: #7aa156;
+	padding: 0;
+	border-bottom: 3px solid #7aa156;
+	margin-bottom: 25px;
 }
 
 .frequently_asked_questions .text_block p {
-    font-size: 1.6em;
-    font-weight: 300;
-    color: #484848;
-    padding: 0 10px;
+	font-size: 1.6em;
+	font-weight: 300;
+	color: #484848;
+	padding: 0 10px;
 }
 
 .frequently_asked_questions .dropdown_group {
-    text-align: left;
+	text-align: left;
 }
 
 .frequently_asked_questions .dropdown_group .droppownGroupItem {
-    padding: 19px 0;
+	padding: 19px 0;
 }
 
 .frequently_asked_questions .dropdown_group .droppownGroupItem .navbar_header {
-    font-size: 2em;
-    font-weight: 300;
-    color: #141558;
-    border: 0;
+	font-size: 2em;
+	font-weight: 300;
+	color: #141558;
+	border: 0;
 }
 
 .frequently_asked_questions .dropdown_group .droppownGroupItem .navbar_header span {
-    transition-property: color;
-    transition-timing-function: ease;
-    transition-duration: 0.5s;
+	transition-property: color;
+	transition-timing-function: ease;
+	transition-duration: 0.5s;
 }
 
 .frequently_asked_questions .dropdown_group .droppownGroupItem .navbar_header span:hover {
-    color: #5d9029;
+	color: #5d9029;
 }
 
 .frequently_asked_questions .dropdown_group .droppownGroupItem.open .navbar_header {
-    color: #5d9029;
-    border-bottom: 3px solid #7aa156;
+	color: #5d9029;
+	border-bottom: 3px solid #7aa156;
 }
 
 .frequently_asked_questions .dropdown_group .droppownGroupItem .dropdown_bar {
-    font-size: 1.6em;
-    font-weight: 300;
-    color: #484848;
-    padding: 25px 10px;
+	font-size: 1.6em;
+	font-weight: 300;
+	color: #484848;
+	padding: 25px 15px;
+	background: #f5f5f5;
 }
 
 .frequently_asked_questions .dropdown_group .droppownGroupItem .dropdown_bar a {
-    color: #7aa156;
+	color: #7aa156;
 }
 

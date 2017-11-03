@@ -1,200 +1,200 @@
 .meet_the_team {
-    overflow: hidden;
-    padding-top: 70px;
-    padding-bottom: 100px;
+	overflow: hidden;
+	padding-top: 70px;
+	padding-bottom: 100px;
 }
 
 .meet_the_team .meet_the_team_block_container {
-    padding-top: 30px;
+	padding-top: 30px;
 }
 
 .meet_the_team .meet_the_team_block_container .block {
-    float: left;
-    width: 100%;
-    position: relative;
-    margin-bottom: 30px;
+	float: left;
+	width: 100%;
+	position: relative;
+	margin-bottom: 30px;
 }
 
 .meet_the_team .meet_the_team_block_container .block:last-child {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .meet_the_team .meet_the_team_block_container .block_content {
-    margin: 0 auto;
-    background: #141558;
-    padding: 40px 0 45px;
-    cursor: default;
-    transition: background ease 0.5s;
-    max-width: 350px;
+	margin: 0 auto;
+	background: #141558;
+	padding: 40px 0 45px;
+	cursor: default;
+	transition: background ease 0.5s;
+	max-width: 350px;
 }
 
 .meet_the_team .meet_the_team_block_container .block_content:hover {
-    background: #676eb0;
+	background: #676eb0;
 }
 
 .meet_the_team .meet_the_team_block_container .block_content div {
-    position: relative;
-    z-index: 1;
-    font-weight: 300;
-    width: 90%;
-    margin-right: auto;
-    margin-left: auto;
+	position: relative;
+	z-index: 1;
+	font-weight: 300;
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .meet_the_team .meet_the_team_block_container img {
-    display: inline-block;
+	display: inline-block;
 }
 
 .meet_the_team .meet_the_team_block_container .name {
-    font-size: 2.4em;
-    color: #fff;
-    margin-bottom: 28px;
+	font-size: 2.4em;
+	color: #fff;
+	margin-bottom: 28px;
 }
 
 .meet_the_team .meet_the_team_block_container .avatar_container {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .meet_the_team .meet_the_team_block_container .avatar_container img {
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 .meet_the_team .meet_the_team_block_container .tier_img_container {
-    /*margin-bottom: 10px;*/
+	/*margin-bottom: 10px;*/
 }
 
 .meet_the_team .meet_the_team_block_container .tier {
-    font-size: 1.8em;
-    font-weight: 300;
-    color: #fff;
+	font-size: 1.8em;
+	font-weight: 300;
+	color: #fff;
 }
 
 .meet_the_team .meet_the_team_block_container .roles_list {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .meet_the_team .meet_the_team_block_container .roles_list li {
-    display: inline-block;
-    width: 38px;
-    height: 38px;
-    background: url('../img/sprites/roles_list_sprite.png') no-repeat;
+	display: inline-block;
+	width: 38px;
+	height: 38px;
+	background: url('../img/sprites/roles_list_sprite.png') no-repeat;
 }
 .meet_the_team .meet_the_team_block_container .roles_list li+li {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 .meet_the_team .meet_the_team_block_container .roles_list li.mid {
-    /*background-image: ;*/
-    background-position: 0 0;
+	/*background-image: ;*/
+	background-position: 0 0;
 }
 .meet_the_team .meet_the_team_block_container .roles_list li.support {
-    /*background-image: ;*/
-    background-position: -38px 0;
+	/*background-image: ;*/
+	background-position: -40px 0;
 }
 .meet_the_team .meet_the_team_block_container .roles_list li.marksman {
-    /*background-image: ;*/
-    background-position: -76px 0;
+	/*background-image: ;*/
+	background-position: -80px 0;
 }
 .meet_the_team .meet_the_team_block_container .roles_list li.top {
-    /*background-image: ;*/
-    background-position: -114px 0;
+	/*background-image: ;*/
+	background-position: -120px 0;
 }
 .meet_the_team .meet_the_team_block_container .roles_list li.jungle {
-    /*background-image: ;*/
-    background-position: -152px 0;
+	/*background-image: ;*/
+	background-position: -160px 0;
 }
 
 @keyframes show_by_fade_in {
-    0% {
-        opacity: 0;
-    }
+	0% {
+		opacity: 0;
+	}
 
-    100% {
-        opacity: 0.5;
-    }
+	100% {
+		opacity: 0.5;
+	}
 }
 
 .meet_the_team .meet_the_team_block_container .about {
-    position: absolute;
-    border: 1px solid #fff;
-    max-width: 350px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #141558;
-    color: transparent;
-    font-size: 1.6em;
-    font-weight: 100;
-    box-shadow:
-            0 0 8px 2px #fff,
-            inset 0 0 6px 1px #fff;
-    border-radius: 4px;
-    z-index: 1;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    display: none;
-    cursor: default;
-    transition: color ease 0.5s;
-    overflow: hidden;
+	position: absolute;
+	border: 1px solid #fff;
+	max-width: 350px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #141558;
+	color: transparent;
+	font-size: 1.6em;
+	font-weight: 100;
+	box-shadow:
+			0 0 8px 2px #fff,
+			inset 0 0 6px 1px #fff;
+	border-radius: 4px;
+	z-index: 1;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	display: none;
+	cursor: default;
+	transition: color ease 0.5s;
+	overflow: hidden;
 }
 .meet_the_team .meet_the_team_block_container .about.block_visible {
-    display: block;
+	display: block;
 }
 .meet_the_team .meet_the_team_block_container .about.text_visible {
-    color: white;
+	color: white;
 }
 
 .meet_the_team .meet_the_team_block_container .about .height_container {
-    transition: height ease 0.5s;
+	transition: height ease 0.5s;
 }
 
 .meet_the_team .meet_the_team_block_container .about .height_sample_elem {
-    padding: 45px 20px;
+	padding: 45px 20px;
 }
 
 @media screen and (max-width: 800px) {
 
-    .meet_the_team .skew_m7,
-    .meet_the_team .skew_m7 .unskew {
-        transform: none;
-    }
+	.meet_the_team .skew_m7,
+	.meet_the_team .skew_m7 .unskew {
+		transform: none;
+	}
 
 }
 
 @media screen and (min-width: 800px) {
 
-    .meet_the_team .meet_the_team_block_container .block {
-        width: 50%;
-    }
-    .meet_the_team .meet_the_team_block_container .block:last-child {
-        width: 100%;
-    }
+	.meet_the_team .meet_the_team_block_container .block {
+		width: 50%;
+	}
+	.meet_the_team .meet_the_team_block_container .block:last-child {
+		width: 100%;
+	}
 
-    .meet_the_team .meet_the_team_block_container .block .block_content {
-        width: 90%;
-        max-width: 380px;
-    }
-    .meet_the_team .meet_the_team_block_container .block:last-child .block_content {
-        width: 45%;
-    }
+	.meet_the_team .meet_the_team_block_container .block .block_content {
+		width: 90%;
+		max-width: 380px;
+	}
+	.meet_the_team .meet_the_team_block_container .block:last-child .block_content {
+		width: 45%;
+	}
 
-    .meet_the_team .meet_the_team_block_container .about {
-        width: 90%;
-        max-width: 380px;
-    }
+	.meet_the_team .meet_the_team_block_container .about {
+		width: 90%;
+		max-width: 380px;
+	}
 
 }
 
 @media screen and (min-width: 992px) {
 
-    .meet_the_team .meet_the_team_block_container .block {
-        width: 33.333333%;
-    }
+	.meet_the_team .meet_the_team_block_container .block {
+		width: 33.333333%;
+	}
 
-    .meet_the_team .meet_the_team_block_container .block:last-child {
-        width: 100%;
-    }
-    .meet_the_team .meet_the_team_block_container .block:last-child .block_content {
-        width: 30%;
-    }
+	.meet_the_team .meet_the_team_block_container .block:last-child {
+		width: 100%;
+	}
+	.meet_the_team .meet_the_team_block_container .block:last-child .block_content {
+		width: 30%;
+	}
 
 }

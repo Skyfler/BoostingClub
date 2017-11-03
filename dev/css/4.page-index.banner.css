@@ -1,92 +1,96 @@
 .banner {
-    background: url("../img/main.jpg") center top no-repeat;
-    background-size: auto 100%;
-    display: none;
+	background: url("../img/main.jpg") center top no-repeat;
+	background-size: auto 100%;
+	display: none;
 }
 
 .banner .container {
-    padding-top: 39.47368421052632%;
+	padding-top: 39.47368421052632%;
 }
 
 .banner .text_block {
-    color: white;
-    position: absolute;
-    text-align: left;
-    top: 50%;
-    transform: translateY(-50%);
+	color: white;
+	position: absolute;
+	text-align: left;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .banner .text_block .title {
-    font-size: 12em;
-    font-weight: 300;
+	font-size: 5em;
+	font-weight: 300
 }
 
 .banner .text_block .text {
-    font-size: 3.6em;
-    font-weight: 300;
+	font-size: 3.6em;
+	font-weight: 300;
 }
 
 @media screen and (min-width: 800px) {
 
-    .banner {
-        display: block;
-    }
+	.banner {
+		display: block;
+	}
 
-    .banner .text_block .title {
-        font-size: 7em;
-    }
+	.banner .text_block .title {
+		font-size: 5em;
+		margin-left: -2px
+	}
 
-    .banner .text_block .text {
-        font-size: 2.4em;
-    }
+	.banner .text_block .text {
+		font-size: 2.4em;
+	}
 
 }
 
 @media screen and (min-width: 992px) {
 
-    .banner .text_block .title {
-        font-size: 8em;
-    }
+	.banner .text_block .title {
+		font-size: 6em;
+		margin-left: -3px
+	}
 
-    .banner .text_block .text {
-        font-size: 2.7em;
-    }
+	.banner .text_block .text {
+		font-size: 2.7em;
+	}
 
 }
 
 @media screen and (min-width: 1150px) {
 
-    .banner .text_block .title {
-        font-size: 10em;
-    }
+	.banner .text_block .title {
+		font-size: 8em;
+		margin-left: -5px
+	}
 
-    .banner .text_block .text {
-        font-size: 3.3em;
-    }
+	.banner .text_block .text {
+		font-size: 3.3em;
+	}
 
 }
 
 @media screen and (min-width: 1400px) {
 
-    .banner .text_block .title {
-        font-size: 12em;
-    }
+	.banner .text_block .title {
+		font-size: 10em;
+		margin-left: -7px
+	}
 
-    .banner .text_block .text {
-        font-size: 3.6em;
-    }
+	.banner .text_block .text {
+		font-size: 3.6em;
+	}
 
 }
 
 @media screen and (min-width: 1900px) {
 
-    .banner {
-        background-size: 100%;
-    }
+	.banner {
+		background-size: 100%;
+	}
 
-    .banner .container {
-        height: 750px;
-        padding-top: 0;
-    }
+	.banner .container {
+		height: 750px;
+		padding-top: 0;
+	}
 
 }

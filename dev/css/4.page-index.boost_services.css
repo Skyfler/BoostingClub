@@ -1,139 +1,166 @@
 .boost_services {
-    overflow: hidden;
-    padding-top: 70px;
+	overflow: hidden;
+	padding-top: 70px;
 }
 
 .boost_services .boost_services_block_container {
-    position: relative;
+	position: relative;
 }
 
 .boost_services .boost_services_block_container .row {
-    float: left;
-    width: 100%;
+	float: left;
+	width: 100%;
 }
 
 .boost_services .boost_services_block_container .block {
-    float: left;
-    width: 100%;
-    cursor: default;
-    padding: 30px 0 55px;
+	float: left;
+	width: 100%;
+	cursor: default;
+	padding: 30px 0 55px;
 }
 
 .boost_services .boost_services_block_container .block_content {
-    display: block;
+	display: block;
 }
 
 .boost_services .boost_services_block_container .block_content:after {
-    content: "";
-    display: none;
-    position: absolute;
-    height: 100%;
-    border-left: 2px solid #a1a1bc;
-    border-right: 2px solid #a1a1bc;
-    top: 0;
-    left: 0;
+	content: "";
+	display: none;
+	position: absolute;
+	height: 100%;
+	border-left: 2px solid #a1a1bc;
+	border-right: 2px solid #a1a1bc;
+	top: 0;
+	left: 0;
 }
 
 .boost_services .boost_services_block_container img {
-    display: inline-block;
+	display: inline-block;
 }
 
 .boost_services .boost_services_block_container .text_block {
-    max-width: 339px;
-    margin: 0 auto;
+	max-width: 339px;
+	margin: 20px auto 0;
 }
 
 .boost_services .boost_services_block_container .title {
-    font-size: 3em;
-    font-weight: 600;
-    color: #141558;
-    margin-top: 20px;
-    transition: color ease 0.5s;
-    text-transform: uppercase;
+	font-size: 3em;
+	font-weight: 600;
+	color: #141558;
+/*	margin-top: 20px;*/
+	transition: color ease 0.5s;
+	text-transform: uppercase;
 }
 .boost_services .boost_services_block_container .block:hover .title {
-    color: #72b22b;
+	color: #72b22b;
+}
+
+.boost_services .boost_services_block_container .title:after {
+	content: '';
+	height: 100%;
+	min-height: 78px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.boost_services .boost_services_block_container .title .v-middle {
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .boost_services .boost_services_block_container .text {
-    font-size: 1.8em;
-    font-weight: 300;
-    color: #141558;
-    margin-top: 10px;
+	font-size: 1.8em;
+	font-weight: 300;
+	color: #141558;
+	margin-top: 8px;
+}
+
+@media screen and (max-width: 799px) {
+
+	.boost_services .skew,
+	.boost_services .skew .unskew {
+		transform: none;
+	}
+
 }
 
 @media screen and (min-width: 800px) {
 
-    .boost_services .boost_services_block_container .block {
-        width: 50%;
-    }
-    .boost_services .boost_services_block_container .row+.row .block {
-        width: 100%;
-    }
+	.boost_services .boost_services_block_container .block {
+		width: 50%;
+	}
+	.boost_services .boost_services_block_container .row+.row .block {
+		width: 100%;
+	}
 
-    .boost_services .boost_services_block_container .row+.row .block .block_content {
-        width: 50%;
-        margin: 0 auto;
-    }
+	.boost_services .boost_services_block_container .row+.row .block .block_content {
+		width: 50%;
+		margin: 0 auto;
+	}
 
-    .boost_services .boost_services_block_container .block_content:after {
-        display: block;
-        width: 50%;
-        top: 0;
-        left: 0;
-    }
-    .boost_services .boost_services_block_container .block+.block .block_content:after {
-        border-left: none;
-        left: 50%;
-    }
-    .boost_services .boost_services_block_container .row+.row .block_content:after {
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-    }
+	.boost_services .boost_services_block_container .block_content:after {
+		display: block;
+		width: 50%;
+		top: 0;
+		left: 0;
+	}
+	.boost_services .boost_services_block_container .block+.block .block_content:after {
+		border-left: none;
+		left: 50%;
+	}
+	.boost_services .boost_services_block_container .row+.row .block_content:after {
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+	}
 
-    .boost_services .boost_services_block_container img {
-        max-width: 80%;
-        position: relative;
-        left: 7px;
-    }
+	.boost_services .boost_services_block_container img {
+		max-width: 80%;
+		position: relative;
+/*		left: 7px;*/
+	}
 
-    .boost_services .boost_services_block_container .text_block {
-        width: 339px;
-        max-width: 80%;
-        margin: 0 auto;
-        position: relative;
-        left: -7px;
-    }
+	.boost_services .boost_services_block_container .text_block {
+		width: 339px;
+		max-width: 80%;
+		margin: 20px auto 0;
+		position: relative;
+/*		left: -7px;*/
+	}
+
+	.boost_services .boost_services_block_container .title {
+		position: relative;
+		left: 10px;
+	}
 
 }
 
 @media screen and (min-width: 992px) {
 
-    .boost_services .boost_services_block_container .row {
-        position: static;
-        width: 66.66666666%;
-    }
-    .boost_services .boost_services_block_container .row+.row {
-        width: 33.333333333%;
-    }
+	.boost_services .boost_services_block_container .row {
+		position: static;
+		width: 66.66666666%;
+	}
+	.boost_services .boost_services_block_container .row+.row {
+		width: 33.333333333%;
+	}
 
-    .boost_services .boost_services_block_container .row+.row .block .block_content {
-        width: 100%;
-        margin: 0;
-    }
+	.boost_services .boost_services_block_container .row+.row .block .block_content {
+		width: 100%;
+		margin: 0;
+	}
 
-    .boost_services .boost_services_block_container .block_content:after {
-        width: 33.333333333%;
-    }
-    .boost_services .boost_services_block_container .block+.block .block_content:after {
-        left: 33.333333333%;
-    }
-    .boost_services .boost_services_block_container .row+.row .block_content:after {
-        border-left: none;
-        left: 66.666666666%;
-        right: auto;
-        margin: 0;
-    }
+	.boost_services .boost_services_block_container .block_content:after {
+		width: 33.333333333%;
+	}
+	.boost_services .boost_services_block_container .block+.block .block_content:after {
+		left: 33.333333333%;
+	}
+	.boost_services .boost_services_block_container .row+.row .block_content:after {
+		border-left: none;
+		left: 66.666666666%;
+		right: auto;
+		margin: 0;
+	}
 
 }
