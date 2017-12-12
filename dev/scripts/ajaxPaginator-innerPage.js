@@ -14,19 +14,23 @@ function InnerPage(innerPageElem, options) {
         this._gMap.insertMap(mapElem);
     }*/
 
-    var dropdownGroupElem = this._innerPageElem.querySelector('.dropdown_group');
-    if (dropdownGroupElem) {
-        this._dropdownGroup = new DropdownGroup({
-            elem: dropdownGroupElem,
-            dropdownSelector: '.droppownGroupItem',
-            dropdownOptions: {
-                transitionDuration: 0.5,
-                openBtnSelector: '[data-component="dropdown_toggle"]',
-                dropdownContainerSelector: '.dropdown_container',
-                dropdownBarSelector: '.dropdown_bar',
-                closeOnResize: true
-            }
-        });
+    var dropdownGroupElems = this._innerPageElem.querySelectorAll('.dropdown_group');
+	this._dropdownGroups = [];
+    if (dropdownGroupElems.length) {
+		for (var i = 0; i < dropdownGroupElems.length; i++) {
+			this._dropdownGroups.push( new DropdownGroup({
+				elem: dropdownGroupElems[i],
+				dropdownSelector: '.droppownGroupItem',
+				dropdownOptions: {
+					transitionDuration: 0.5,
+					openBtnSelector: '[data-component="dropdown_toggle"]',
+					dropdownContainerSelector: '.dropdown_container',
+					dropdownBarSelector: '.dropdown_bar',
+					closeOnResize: true
+				}
+			}) );
+		}
+        
     }
 
     var tabsContainerElem = this._innerPageElem.querySelector('.tabs_container');

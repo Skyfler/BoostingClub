@@ -44,6 +44,7 @@
 
     .payment_systems li img {
         margin: 0 auto;
+		filter: brightness(0%) invert(100%);
     }
 
 }
@@ -56,6 +57,7 @@
 
     .payment_systems li {
         width: auto;
+		max-width: 12.5%;
     }
 
 }

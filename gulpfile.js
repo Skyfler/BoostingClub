@@ -99,13 +99,30 @@ gulp.task('cssIe', function () {
 gulp.task('css', ['cssModern', 'cssIe']);
 
 gulp.task('image', function () {
-    gulp.src(path.dev.img)
-        .pipe(imagemin({
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
-            use: [pngquant()]
-        }))
-        .pipe(gulp.dest(path.public.img));
+	gulp.src(path.dev.img)
+//		.pipe(imagemin({
+//			progressive: true,
+//			svgoPlugins: [{
+//				removeViewBox: false,
+//				convertPathData: false,
+//				mergePaths: false
+//			}],
+//			use: [pngquant()]
+//		}))
+		.pipe(imagemin([
+			imagemin.gifsicle({interlaced: true}),
+			imagemin.jpegtran({progressive: true}),
+			imagemin.optipng({optimizationLevel: 5}),
+			imagemin.svgo({
+				plugins: [
+					{removeViewBox: false},
+					{convertPathData: false},
+					{mergePaths: false},
+					{collapseGroups: false}
+				]
+			}),
+		]))
+		.pipe(gulp.dest(path.public.img));
 });
 
 gulp.task('php', function () {

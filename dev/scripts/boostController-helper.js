@@ -129,15 +129,15 @@ module.exports = {
         },
         lp40: {
             name: 'lp40',
-            multiplier: 0.6
+            multiplier: 0.5
         },
         lp60: {
             name: 'lp60',
-            multiplier: 0.4
+            multiplier: 0.5
         },
         lp80: {
             name: 'lp80',
-            multiplier: 0.2
+            multiplier: 0.5
         }
     },
 

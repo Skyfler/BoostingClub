@@ -63,3 +63,17 @@
 	color: #7aa156;
 }
 
+.frequently_asked_questions p + p,
+.frequently_asked_questions ul + p,
+.frequently_asked_questions p + ul {
+	margin-top: 15px;
+}
+
+.frequently_asked_questions ul {
+	padding-left: 20px;
+	list-style: outside;
+}
+
+.frequently_asked_questions li + li {
+	margin-top: 10px;
+}

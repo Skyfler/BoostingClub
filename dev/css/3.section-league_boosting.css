@@ -83,11 +83,13 @@
 
 
 .league_boosting .tabs_container .input_group {
-    float: left;
+/*    float: left;*/
     padding: 0 10px;
     margin-bottom: 30px;
     width: 100%;
     position: relative;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .league_boosting .tabs_container .tab_block .quarter_width .input_group > * {
@@ -97,7 +99,7 @@
 }
 
 .league_boosting .tabs_container .input_group:last-child {
-    margin-bottom: 0;
+/*    margin-bottom: 0;*/
 }
 
 .league_boosting .tabs_container input[type="text"],
@@ -365,7 +367,7 @@
     }
     .league_boosting .tabs_container .form_container form .input_group+.input_group {
         width: 70%;
-        float: right;
+/*        float: right;*/
     }
 
     .league_boosting .tabs_container .form_container form .input_group img {

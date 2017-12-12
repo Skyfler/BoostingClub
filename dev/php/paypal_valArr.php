@@ -83,15 +83,15 @@ $valArr = array(
         ),
         'lp40' =>  array(
             'name' => 'lp40',
-            'multiplier' => 0.6
+            'multiplier' => 0.5
         ),
         'lp60' =>  array(
             'name' => 'lp60',
-            'multiplier' => 0.4
+            'multiplier' => 0.5
         ),
         'lp80' =>  array(
             'name' => 'lp80',
-            'multiplier' => 0.2
+            'multiplier' => 0.5
         )
     ),
 
